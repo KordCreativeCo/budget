@@ -7201,7 +7201,7 @@ function installManifest() {
     // The demo always opens on the sample planner, in the visitor's language
     setLang(guessLang());
     state = sampleState();
-    Object.assign(state.settings, { onboarded: true, lang: LANG });
+    Object.assign(state.settings, { onboarded: true, lang: LANG, currency: 'USD' });
   } else if (returning) setLang(state.settings.lang || guessLang());
   else {
     // First visit: an empty planner in the buyer's language, opened on the welcome screen
@@ -7214,6 +7214,12 @@ function installManifest() {
   installManifest();
   route();
   if (!state.settings.onboarded) openOnboarding();
+  // The demo shows visitors around on arrival, once per visit (they can replay it from the banner)
+  if (DEMO) {
+    let seen = false;
+    try { seen = sessionStorage.getItem('demoTour') === '1'; sessionStorage.setItem('demoTour', '1'); } catch (e) { /* private mode: just show it */ }
+    if (!seen) setTimeout(() => startTour(), 700);
+  }
 })();
 
 </script>
