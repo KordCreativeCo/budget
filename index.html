@@ -327,10 +327,10 @@ h2 { font-family: var(--display); font-weight: var(--h2-weight); font-size: var(
 /* ---- Customer care: alerts, first-run guide, honest-number note ---- */
 .banner.alert { background: color-mix(in srgb, var(--bad) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--bad) 45%, transparent); color: var(--ink); }
 .banner.alert .btn.primary { background: var(--bad); border-color: var(--bad); color: #fff; }
-.hero .starting { margin: 14px auto 0; max-width: 30em; font-family: var(--script); font-style: italic; font-size: 1.12rem; line-height: 1.35; color: color-mix(in srgb, var(--hero-ink) 86%, transparent); }
+.hero .starting { margin: 14px auto 0; max-width: 26em; text-wrap: balance; font-family: var(--script); font-style: italic; font-size: 1.12rem; line-height: 1.35; color: color-mix(in srgb, var(--hero-ink) 86%, transparent); }
 .hero .head > .label:first-child { margin: 0 0 12px; }
-.today-meter { width: min(100%, 26em); margin: 16px auto 0; text-align: left; }
-.today-meter .bar { height: 6px; border-radius: 999px; background: color-mix(in srgb, var(--hero-ink) 16%, transparent); overflow: hidden; }
+.today-meter { width: min(100%, 22em); margin: 16px auto 0; text-align: center; }
+.today-meter .bar { height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--hero-ink) 16%, transparent); overflow: hidden; }
 .today-meter .bar i { display: block; height: 100%; background: var(--hero-ink); border-radius: inherit; }
 .today-meter small { display: block; margin-top: 8px; font-size: 0.78rem; opacity: 0.75; }
 .hero-note { background: none; border: 0; padding: 0; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; cursor: pointer; }
@@ -575,6 +575,7 @@ const N_ = s => s;
 </script>
 <script>
 I18N.es = {
+ "{amount} has to last until payday on {date}": "{amount} tienen que durar hasta el día de pago, el {date}",
  "Add your bank balance for an exact number": "Añade el saldo de tu banco para un número exacto",
  "Already set aside": "Ya apartado",
  "Arrived after that balance": "Entró después de ese saldo",
@@ -584,7 +585,6 @@ I18N.es = {
  "Check your banking app and type the balance you see. Safe to spend works from this, so update it whenever you check.": "Mira tu app del banco y escribe el saldo que ves. Disponible para gastar parte de este número, así que actualízalo cada vez que lo mires.",
  "How is this worked out?": "¿Cómo se calcula?",
  "In {account} on {date}": "En {account} el {date}",
- "of today’s starting {start} · {amount} has to last until payday on {date}": "de los {start} con que empieza hoy · {amount} tienen que durar hasta el día de pago, el {date}",
  "Paid and spent after that balance": "Pagado y gastado después de ese saldo",
  "Safe to spend today": "Disponible para gastar hoy",
  "Safe until payday": "Disponible hasta el día de pago",
@@ -1442,6 +1442,7 @@ I18N.es = {
 </script>
 <script>
 I18N.fr = {
+ "{amount} has to last until payday on {date}": "{amount} doivent tenir jusqu’à la paie du {date}",
  "Add your bank balance for an exact number": "Ajoutez le solde de votre banque pour un chiffre exact",
  "Already set aside": "Déjà mis de côté",
  "Arrived after that balance": "Arrivé après ce solde",
@@ -1451,7 +1452,6 @@ I18N.fr = {
  "Check your banking app and type the balance you see. Safe to spend works from this, so update it whenever you check.": "Ouvrez votre appli bancaire et saisissez le solde affiché. Disponible à dépenser part de ce chiffre : mettez-le à jour à chaque vérification.",
  "How is this worked out?": "Comment est-ce calculé ?",
  "In {account} on {date}": "Sur {account} le {date}",
- "of today’s starting {start} · {amount} has to last until payday on {date}": "sur les {start} du début de journée · {amount} doivent tenir jusqu’à la paie du {date}",
  "Paid and spent after that balance": "Payé et dépensé après ce solde",
  "Safe to spend today": "Disponible à dépenser aujourd’hui",
  "Safe until payday": "Disponible jusqu’à la paie",
@@ -2309,6 +2309,7 @@ I18N.fr = {
 </script>
 <script>
 I18N.de = {
+ "{amount} has to last until payday on {date}": "{amount} müssen bis zum Zahltag am {date} reichen",
  "Add your bank balance for an exact number": "Trag deinen Kontostand ein, damit die Zahl genau stimmt",
  "Already set aside": "Schon zurückgelegt",
  "Arrived after that balance": "Nach diesem Stand eingegangen",
@@ -2318,7 +2319,6 @@ I18N.de = {
  "Check your banking app and type the balance you see. Safe to spend works from this, so update it whenever you check.": "Schau in deine Banking-App und gib den Kontostand ein. Frei verfügbar rechnet damit, also aktualisiere ihn, wann immer du nachschaust.",
  "How is this worked out?": "Wie wird das berechnet?",
  "In {account} on {date}": "Auf {account} am {date}",
- "of today’s starting {start} · {amount} has to last until payday on {date}": "von heute anfänglich {start} · {amount} müssen bis zum Zahltag am {date} reichen",
  "Paid and spent after that balance": "Nach diesem Stand bezahlt und ausgegeben",
  "Safe to spend today": "Heute frei verfügbar",
  "Safe until payday": "Frei bis zum Zahltag",
@@ -3176,6 +3176,7 @@ I18N.de = {
 </script>
 <script>
 I18N.it = {
+ "{amount} has to last until payday on {date}": "{amount} devono durare fino alla paga del {date}",
  "Add your bank balance for an exact number": "Aggiungi il saldo del conto per un numero esatto",
  "Already set aside": "Già accantonato",
  "Arrived after that balance": "Entrato dopo quel saldo",
@@ -3185,7 +3186,6 @@ I18N.it = {
  "Check your banking app and type the balance you see. Safe to spend works from this, so update it whenever you check.": "Controlla l’app della banca e scrivi il saldo che vedi. Disponibile da spendere parte da qui, quindi aggiornalo ogni volta che controlli.",
  "How is this worked out?": "Come viene calcolato?",
  "In {account} on {date}": "Su {account} il {date}",
- "of today’s starting {start} · {amount} has to last until payday on {date}": "dei {start} di partenza di oggi · {amount} devono durare fino alla paga del {date}",
  "Paid and spent after that balance": "Pagato e speso dopo quel saldo",
  "Safe to spend today": "Disponibile da spendere oggi",
  "Safe until payday": "Disponibile fino alla paga",
@@ -4043,6 +4043,7 @@ I18N.it = {
 </script>
 <script>
 I18N.pt = {
+ "{amount} has to last until payday on {date}": "{amount} precisam durar até o pagamento em {date}",
  "Add your bank balance for an exact number": "Adicione o saldo do banco para um número exato",
  "Already set aside": "Já separado",
  "Arrived after that balance": "Entrou depois desse saldo",
@@ -4052,7 +4053,6 @@ I18N.pt = {
  "Check your banking app and type the balance you see. Safe to spend works from this, so update it whenever you check.": "Abra o app do banco e digite o saldo que aparece. O Livre para gastar parte desse número, então atualize sempre que conferir.",
  "How is this worked out?": "Como isso é calculado?",
  "In {account} on {date}": "Em {account} em {date}",
- "of today’s starting {start} · {amount} has to last until payday on {date}": "dos {start} do início de hoje · {amount} precisam durar até o pagamento em {date}",
  "Paid and spent after that balance": "Pago e gasto depois desse saldo",
  "Safe to spend today": "Livre para gastar hoje",
  "Safe until payday": "Livre até o pagamento",
@@ -6165,12 +6165,16 @@ VIEWS.today = () => {
     : S.future
       ? billFact(t('First bill'), firstBill) + fact(t('Bills this period'), money(S.billsTotal), tn(S.bills.length, '{n} payment', '{n} payments')) + fact(t('Payday'), fmtShort(p.start), whenText(diffDays(today, p.start)))
       : fact(t('Bills paid'), t('{done} of {total}', { done: S.bills.filter(b => b.paid).length, total: S.bills.length }), money(S.billsPaid)) + fact(t('Spent'), money(S.spent), tn(S.txs.length, '{n} entry', '{n} entries')) + fact(t('Ended'), fmtShort(p.end), '');
+  // Keep it calm: each amount appears once. The meter (with today's starting amount) only shows once something is spent today
+  const spentSome = B && B.freeToday > 0.004;
+  const lastLine = B && (S.daysLeft === 1 ? t('Payday is tomorrow. Whatever you don’t spend carries into your next pay period.')
+    : t('{amount} has to last until payday on {date}', { amount: money(B.safe), date: fmtShort(p.nextPay) }));
   const balanceHead = B ? `<div class="head"><div class="label">${t('Safe to spend today')}</div>
       <div class="big ${ui.reveal ? 'reveal' : ''}">${money(B.left)}</div>
-      <p class="starting">${t('of today’s starting {start} · {amount} has to last until payday on {date}', { start: money(B.start), amount: money(B.safe), date: fmtShort(p.nextPay) })}</p>
-      <div class="today-meter" role="img" aria-label="${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}"><div class="bar"><i style="width:${Math.min(100, pct(B.freeToday, Math.max(B.start, 0.01)))}%"></i></div>
-        <small>${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}</small></div>
-      <p class="sub">${S.daysLeft === 1 ? `<span>${t('Payday is tomorrow. Whatever you don’t spend carries into your next pay period.')}</span>` : ''}<button class="hero-note" data-act="showWorking">${t('How is this worked out?')}</button><span class="status ${tone}"><i></i>${t(status)}</span></p></div>` : '';
+      <p class="starting">${lastLine}</p>
+      ${spentSome ? `<div class="today-meter"><div class="bar" role="img" aria-label="${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}"><i style="width:${Math.min(100, pct(B.freeToday, Math.max(B.start, 0.01)))}%"></i></div>
+        <small>${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}</small></div>` : ''}
+      <p class="sub"><button class="hero-note" data-act="showWorking">${t('How is this worked out?')}</button><span class="status ${tone}"><i></i>${t(status)}</span></p></div>` : '';
   const hero = `<section class="hero" data-tour="hero" aria-label="${B ? t('Safe to spend today') : heroLabel}">
     ${balanceHead || `<div class="head"><div class="big ${ui.reveal ? 'reveal' : ''}">${heroFigure}</div>
       <div class="label">${figureLabel}</div>
