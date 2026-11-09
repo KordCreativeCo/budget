@@ -210,7 +210,7 @@ h3 { font-size: 0.95rem; }
 .hero .days i.now.at-end b { left: auto; right: 0; transform: none; }
 .hero .ends { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
 .hero .pace { margin: 16px 0 0; font-family: var(--script); font-size: 1.02rem; line-height: 1.3; opacity: 0.82; }
-.breakdown .line { display: flex; justify-content: space-between; padding: 7px 0; border-top: 1px dashed var(--line); font-variant-numeric: tabular-nums; }
+.breakdown .line { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 7px 0; border-top: 1px dashed var(--line); font-variant-numeric: tabular-nums; }
 .breakdown .line:first-child { border-top: none; }
 .breakdown .total { border-top: 2px solid var(--ink); font-weight: 800; padding-top: 10px; margin-top: 4px; }
 .shortcuts { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
@@ -327,7 +327,8 @@ h2 { font-family: var(--display); font-weight: var(--h2-weight); font-size: var(
 /* ---- Customer care: alerts, first-run guide, honest-number note ---- */
 .banner.alert { background: color-mix(in srgb, var(--bad) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--bad) 45%, transparent); color: var(--ink); }
 .banner.alert .btn.primary { background: var(--bad); border-color: var(--bad); color: #fff; }
-.hero .starting { margin: 14px auto 0; max-width: 26em; text-wrap: balance; font-family: var(--script); font-style: italic; font-size: 1.12rem; line-height: 1.35; color: color-mix(in srgb, var(--hero-ink) 86%, transparent); }
+.hero .based { margin: 10px 0 0; font-size: 0.86rem; letter-spacing: 0.02em; color: color-mix(in srgb, var(--hero-ink) 72%, transparent); }
+.hero .starting { margin: 8px auto 0; max-width: 26em; text-wrap: balance; font-family: var(--script); font-style: italic; font-size: 1.12rem; line-height: 1.35; color: color-mix(in srgb, var(--hero-ink) 86%, transparent); }
 .hero .head > .label:first-child { margin: 0 0 12px; }
 .today-meter { width: min(100%, 22em); margin: 16px auto 0; text-align: center; }
 .today-meter .bar { height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--hero-ink) 16%, transparent); overflow: hidden; }
@@ -528,6 +529,11 @@ a { text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .card, .tile { break-inside: avoid; }
 }
 
+/* Amounts never break in the middle; the facts shrink a little on narrow phones instead */
+.breakdown .line > :last-child { white-space: nowrap; }
+.hero .fv { white-space: nowrap; }
+@media (max-width: 480px) { .shell .hero dd { font-size: 1.12rem; } }
+
 </style>
 </head>
 <body>
@@ -575,11 +581,18 @@ const N_ = s => s;
 </script>
 <script>
 I18N.es = {
+ "Shared over the {n} day until payday on {date}": "Repartido en {n} día hasta el día de pago, el {date}",
+ "Shared over the {n} days until payday on {date}": "Repartido en {n} días hasta el día de pago, el {date}",
+ "Add your first bill": "Añade tu primera factura",
+ "Based on {amount} in {account} on {date}": "Según {amount} en {account} el {date}",
+ "Day {day} of {len} in this pay period · a fresh start, nothing spent yet": "Día {day} de {len} en este periodo de pago · empiezas de cero, aún no has gastado nada",
+ "Left this period": "Queda este periodo",
+ "None yet": "Ninguna aún",
+ "until payday": "hasta el día de pago",
  "Money arriving before payday that covers bills": "Dinero que llega antes del día de pago y cubre facturas",
  "Payday has passed since your balance on {date}. Update your balance to include it.": "Ha pasado un día de pago desde tu saldo del {date}. Actualiza tu saldo para incluirlo.",
  "Set aside: envelopes {env} · goals {goals}": "Apartado: sobres {env} · metas {goals}",
  "{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.": "Faltan {amount} antes del día de pago, el {date}. No hay nada disponible para gastar hasta cubrirlo.",
- "{amount} has to last until payday on {date}": "{amount} tienen que durar hasta el día de pago, el {date}",
  "Add your bank balance for an exact number": "Añade el saldo de tu banco para un número exacto",
  "Already set aside": "Ya apartado",
  "Arrived after that balance": "Entró después de ese saldo",
@@ -1445,11 +1458,18 @@ I18N.es = {
 </script>
 <script>
 I18N.fr = {
+ "Shared over the {n} day until payday on {date}": "Réparti sur {n} jour jusqu’à la paie du {date}",
+ "Shared over the {n} days until payday on {date}": "Réparti sur {n} jours jusqu’à la paie du {date}",
+ "Add your first bill": "Ajoutez votre première facture",
+ "Based on {amount} in {account} on {date}": "D’après {amount} sur {account} le {date}",
+ "Day {day} of {len} in this pay period · a fresh start, nothing spent yet": "Jour {day} sur {len} de cette période de paie · nouveau départ, rien de dépensé pour l’instant",
+ "Left this period": "Reste sur la période",
+ "None yet": "Aucune pour l’instant",
+ "until payday": "jusqu’à la paie",
  "Money arriving before payday that covers bills": "Argent qui arrive avant la paie et couvre des factures",
  "Payday has passed since your balance on {date}. Update your balance to include it.": "Une paie est arrivée depuis votre solde du {date}. Mettez votre solde à jour pour l’inclure.",
  "Set aside: envelopes {env} · goals {goals}": "Mis de côté : enveloppes {env} · objectifs {goals}",
  "{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.": "Il manque {amount} avant la paie du {date}. Rien n’est disponible tant que ce n’est pas couvert.",
- "{amount} has to last until payday on {date}": "{amount} doivent tenir jusqu’à la paie du {date}",
  "Add your bank balance for an exact number": "Ajoutez le solde de votre banque pour un chiffre exact",
  "Already set aside": "Déjà mis de côté",
  "Arrived after that balance": "Arrivé après ce solde",
@@ -2315,11 +2335,18 @@ I18N.fr = {
 </script>
 <script>
 I18N.de = {
+ "Shared over the {n} day until payday on {date}": "Verteilt auf {n} Tag bis zum Zahltag am {date}",
+ "Shared over the {n} days until payday on {date}": "Verteilt auf {n} Tage bis zum Zahltag am {date}",
+ "Add your first bill": "Füge deine erste Rechnung hinzu",
+ "Based on {amount} in {account} on {date}": "Ausgehend von {amount} auf {account} am {date}",
+ "Day {day} of {len} in this pay period · a fresh start, nothing spent yet": "Tag {day} von {len} in diesem Lohnzeitraum · ein frischer Start, noch nichts ausgegeben",
+ "Left this period": "Übrig in diesem Zeitraum",
+ "None yet": "Noch keine",
+ "until payday": "bis zum Zahltag",
  "Money arriving before payday that covers bills": "Geld vor dem Zahltag, das Rechnungen deckt",
  "Payday has passed since your balance on {date}. Update your balance to include it.": "Seit deinem Kontostand vom {date} war ein Zahltag. Aktualisiere deinen Kontostand, damit er dabei ist.",
  "Set aside: envelopes {env} · goals {goals}": "Zurückgelegt: Umschläge {env} · Ziele {goals}",
  "{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.": "Bis zum Zahltag am {date} fehlen {amount}. Bis das gedeckt ist, ist nichts frei verfügbar.",
- "{amount} has to last until payday on {date}": "{amount} müssen bis zum Zahltag am {date} reichen",
  "Add your bank balance for an exact number": "Trag deinen Kontostand ein, damit die Zahl genau stimmt",
  "Already set aside": "Schon zurückgelegt",
  "Arrived after that balance": "Nach diesem Stand eingegangen",
@@ -3185,11 +3212,18 @@ I18N.de = {
 </script>
 <script>
 I18N.it = {
+ "Shared over the {n} day until payday on {date}": "Ripartito su {n} giorno fino alla paga del {date}",
+ "Shared over the {n} days until payday on {date}": "Ripartito su {n} giorni fino alla paga del {date}",
+ "Add your first bill": "Aggiungi la prima bolletta",
+ "Based on {amount} in {account} on {date}": "In base a {amount} su {account} il {date}",
+ "Day {day} of {len} in this pay period · a fresh start, nothing spent yet": "Giorno {day} di {len} in questo periodo di paga · si riparte da zero, ancora nessuna spesa",
+ "Left this period": "Resta in questo periodo",
+ "None yet": "Nessuna per ora",
+ "until payday": "fino alla paga",
  "Money arriving before payday that covers bills": "Soldi in arrivo prima della paga che coprono bollette",
  "Payday has passed since your balance on {date}. Update your balance to include it.": "C’è stato un giorno di paga dal saldo del {date}. Aggiorna il saldo per includerlo.",
  "Set aside: envelopes {env} · goals {goals}": "Accantonato: buste {env} · obiettivi {goals}",
  "{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.": "Mancano {amount} prima della paga del {date}. Niente è disponibile finché non è coperto.",
- "{amount} has to last until payday on {date}": "{amount} devono durare fino alla paga del {date}",
  "Add your bank balance for an exact number": "Aggiungi il saldo del conto per un numero esatto",
  "Already set aside": "Già accantonato",
  "Arrived after that balance": "Entrato dopo quel saldo",
@@ -4055,11 +4089,18 @@ I18N.it = {
 </script>
 <script>
 I18N.pt = {
+ "Shared over the {n} day until payday on {date}": "Dividido em {n} dia até o pagamento em {date}",
+ "Shared over the {n} days until payday on {date}": "Dividido em {n} dias até o pagamento em {date}",
+ "Add your first bill": "Adicione sua primeira conta",
+ "Based on {amount} in {account} on {date}": "Com base em {amount} em {account} em {date}",
+ "Day {day} of {len} in this pay period · a fresh start, nothing spent yet": "Dia {day} de {len} neste período de pagamento · começo do zero, nada gasto ainda",
+ "Left this period": "Resta neste período",
+ "None yet": "Nenhuma ainda",
+ "until payday": "até o pagamento",
  "Money arriving before payday that covers bills": "Dinheiro que chega antes do pagamento e cobre contas",
  "Payday has passed since your balance on {date}. Update your balance to include it.": "Houve um pagamento desde o seu saldo de {date}. Atualize o saldo para incluí-lo.",
  "Set aside: envelopes {env} · goals {goals}": "Separado: envelopes {env} · metas {goals}",
  "{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.": "Faltam {amount} antes do pagamento em {date}. Nada está livre para gastar até isso ser coberto.",
- "{amount} has to last until payday on {date}": "{amount} precisam durar até o pagamento em {date}",
  "Add your bank balance for an exact number": "Adicione o saldo do banco para um número exato",
  "Already set aside": "Já separado",
  "Arrived after that balance": "Entrou depois desse saldo",
@@ -6197,7 +6238,6 @@ VIEWS.today = () => {
     ready.length ? `<div class="banner warm"><span>${ready.length > 1 ? tn(ready.length - 1, '{item} and {n} other item on your wait list are ready to decide.', '{item} and {n} other items on your wait list are ready to decide.', { item: `<b>${esc(ready[0].name)}</b>` }) : t('{item} on your wait list is ready to decide.', { item: `<b>${esc(ready[0].name)}</b>` })}</span><a class="btn sm" href="#waitlist">${t('Decide')}</a></div>` : '',
   ].join('');
   const heroLabel = S.future ? t('Projected safe to spend') : S.current ? t('Safe to spend') : t('Left at the end of the period');
-  const toPay = diffDays(today, p.nextPay);
   // While there's money left this period, the daily amount leads and the total supports it
   // On the last day the whole amount isn't a spending target: it carries into the next pay period
   const lastDay = S.current && S.daysLeft === 1 && S.safe > 0;
@@ -6210,12 +6250,16 @@ VIEWS.today = () => {
   const status = B ? B.status : S.status;
   const tone = { 'On track': 'good', 'Watch it': 'warn', 'Over pace': 'warn', 'Over budget': 'bad' }[status];
   const todayCount = spendsIn(today, today).length;
-  const fact = (k, v, note) => `<div class="fact"><dt>${k}</dt><dd>${v}${note ? `<small>${note}</small>` : ''}</dd></div>`;
-  const billFact = (k, b) => fact(k, b ? esc(b.bill.name) : t('None due'), b ? `${b.due < today ? t('overdue') + ' · ' : ''}${fmtShort(b.due)} · ${money(b.bill.amount)}` : '');
+  const fact = (k, v, note) => `<div class="fact"><dt>${k}</dt><dd><span class="fv">${v}</span>${note ? `<small>${note}</small>` : ''}</dd></div>`;
+  // An empty tile points to the step that fills it
+  const go = (act, label) => `<button class="hero-note" data-act="${act}">${label} →</button>`;
+  const noBills = !liveBills().length && !state.sample;
+  const billFact = (k, b) => noBills ? fact(k, t('None yet'), go('addBill', t('Add your first bill')))
+    : fact(k, b ? esc(b.bill.name) : t('None due'), b ? `${b.due < today ? t('overdue') + ' · ' : ''}${fmtShort(b.due)} · ${money(b.bill.amount)}` : '');
   // Each kind of period shows facts about itself, not about today
   const firstBill = S.bills[0];
   const facts = S.current
-    ? billFact(t('Next bill'), nextBill) + fact(t('Spent today'), money(spentToday), todayCount ? tn(todayCount, '{n} entry', '{n} entries') : t('nothing yet')) + fact(t('Next payday'), fmtShort(p.nextPay), whenText(toPay))
+    ? billFact(t('Next bill'), nextBill) + fact(t('Spent today'), money(spentToday), todayCount ? tn(todayCount, '{n} entry', '{n} entries') : t('nothing yet')) + fact(t('Left this period'), money(B ? B.safe : S.safe), t('until payday'))
     : S.future
       ? billFact(t('First bill'), firstBill) + fact(t('Bills this period'), money(S.billsTotal), tn(S.bills.length, '{n} payment', '{n} payments')) + fact(t('Payday'), fmtShort(p.start), whenText(diffDays(today, p.start)))
       : fact(t('Bills paid'), t('{done} of {total}', { done: S.bills.filter(b => b.paid).length, total: S.bills.length }), money(S.billsPaid)) + fact(t('Spent'), money(S.spent), tn(S.txs.length, '{n} entry', '{n} entries')) + fact(t('Ended'), fmtShort(p.end), '');
@@ -6223,9 +6267,10 @@ VIEWS.today = () => {
   const spentSome = B && B.freeToday > 0.004;
   const lastLine = B && (B.safe < 0 ? t('{amount} short before payday on {date}. Nothing is safe to spend until it’s covered.', { amount: money(B.short), date: fmtShort(p.nextPay) })
     : S.daysLeft === 1 ? t('Payday is tomorrow. Whatever you don’t spend carries into your next pay period.')
-    : t('{amount} has to last until payday on {date}', { amount: money(B.safe), date: fmtShort(p.nextPay) }));
+    : tn(S.daysLeft, 'Shared over the {n} day until payday on {date}', 'Shared over the {n} days until payday on {date}', { date: fmtShort(p.nextPay) }));
   const balanceHead = B ? `<div class="head"><div class="label">${t('Safe to spend today')}</div>
       <div class="big ${ui.reveal ? 'reveal' : ''}">${money(B.left)}</div>
+      <p class="based">${t('Based on {amount} in {account} on {date}', { amount: money(B.balance), account: esc(B.acc.name), date: fmtShort(B.checkedOn) })}</p>
       <p class="starting">${lastLine}</p>
       ${spentSome ? `<div class="today-meter"><div class="bar" role="img" aria-label="${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}"><i style="width:${Math.min(100, pct(B.freeToday, Math.max(B.start, 0.01)))}%"></i></div>
         <small>${t('{spent} of today’s starting {start}', { spent: money(B.freeToday), start: money(B.start) })}</small></div>` : ''}
@@ -6239,7 +6284,7 @@ VIEWS.today = () => {
     <dl class="facts">${facts}</dl>
     ${S.current ? `<div class="timeline">${dayMeasure(p, S)}
       <div class="ends"><span>${t('Last payday')}<i> · </i><b>${fmtShort(p.start)}</b></span><span>${t('Next payday')}<i> · </i><b>${fmtShort(p.nextPay)}</b></span></div>
-      <p class="pace">${t('Day {day} of {len} in this pay period · you’ve spent about {amount} a day', { day: S.elapsed, len: S.len, amount: money(S.avgDaily) })}</p></div>` : ''}</section>`;
+      <p class="pace">${S.txs.length ? t('Day {day} of {len} in this pay period · you’ve spent about {amount} a day', { day: S.elapsed, len: S.len, amount: money(S.avgDaily) }) : t('Day {day} of {len} in this pay period · a fresh start, nothing spent yet', { day: S.elapsed, len: S.len })}</p></div>` : ''}</section>`;
   const line = (sign, label, v) => `<div class="line"><span>${sign} ${label}</span><b>${money(v)}</b></div>`;
   const signed = (label, sign, v) => `<div class="line"><span>${label}</span><b>${sign}${sign ? ' ' : ''}${money(v)}</b></div>`;
   const breakdownBalance = B ? `<div class="card breakdown" id="working" data-tour="breakdown"><div class="card-head"><h2>${t('How this number is made')}</h2><span class="row wrap"><button class="btn sm" data-act="updateBalance">${t('Update balance')}</button><a class="btn sm" href="#guide">${t('Why')}</a></span></div>
@@ -6287,8 +6332,8 @@ VIEWS.today = () => {
     ${periodNav(p)}
     <div class="grid g2">${hero}${breakdown}</div>
     <div class="grid g4">${tile(t('Came in'), money(S.income), S.otherLanded ? t('incl. {amount} other income', { amount: money(S.otherLanded) }) : tn(paydays, '{n} payday', '{n} paydays'))}
-      ${tile(t('Bills & subs'), money(S.billsTotal), t('{amount} still to pay', { amount: money(S.billsTotal - S.billsPaid) }))}
-      ${tile(t('In envelopes'), money(S.envReserve), tn(S.envs.length, '{n} envelope', '{n} envelopes'))}${tile(t('Spent'), money(S.spent), t('this period'))}</div>
+      ${tile(t('Bills & subs'), money(S.billsTotal), noBills ? go('addBill', t('Add your first bill')) : t('{amount} still to pay', { amount: money(S.billsTotal - S.billsPaid) }))}
+      ${tile(t('In envelopes'), money(S.envReserve), !state.envelopes.length && !state.sample ? go('addEnv', t('Add an envelope')) : tn(S.envs.length, '{n} envelope', '{n} envelopes'))}${tile(t('Spent'), money(S.spent), !spends().length && !state.sample ? go('logSpend', t('Log your first spend')) : t('this period'))}</div>
     ${s.shortcutsPos === 'lower' ? shortcutsHtml : ''}
     <div class="grid g2">
       <div class="card chart"><div class="card-head"><h2>${t('Spending, day by day')}</h2><span class="small muted">${t('avg {amount}', { amount: money(S.avgDaily) })}</span></div>${barChart(dayVals, { labels: dayLabels, highlight: todayIdx, avg: S.avgDaily || null })}</div>
@@ -6307,7 +6352,7 @@ VIEWS.today = () => {
         ${tile(t('Payday routine'), t('{done} of {total}', { done: routineTicks(rPay).length, total: rPay.steps.length }), `<a href="#routines">${t('steps done')}</a>`)}
         ${tile(t('Wait list'), String(state.waitlist.filter(w => w.status === 'waiting').length), t('{n} ready to decide', { n: ready.length }))}
         ${tile(t('Debt owed'), money(debtTotal, { whole: true }), tn(state.debts.filter(d => debtBalance(d) > 0).length, '{n} debt', '{n} debts'))}
-        ${tile(t('Goals'), t('{n} active', { n: state.goals.filter(g => !goalDone(g)).length }), t('{n} reached', { n: state.goals.filter(goalDone).length }))}
+        ${tile(t('Goals'), t('{n} active', { n: state.goals.filter(g => !goalDone(g)).length }), !state.goals.length && !state.sample ? go('addGoal', t('Add a goal')) : t('{n} reached', { n: state.goals.filter(goalDone).length }))}
         ${tile(t('Net in accounts'), money(netBalance(), { whole: true }), t('cards subtracted'))}</div>
     <p class="small muted">${t('Your data lives only on this device.')} ${s.lastBackup ? t('Last backup {date}.', { date: fmtDate(s.lastBackup) }) : t('No backup yet.')} <a href="#" data-act="backup">${t('Back up now')}</a></p></div>`;
 };
