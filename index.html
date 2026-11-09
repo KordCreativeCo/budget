@@ -568,6 +568,10 @@ const N_ = s => s;
 </script>
 <script>
 I18N.es = {
+ "Set aside for bills due later": "Apartado para facturas futuras",
+ "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Las facturas se apartan un poco cada día, para que el dinero esté listo el día antes de cada vencimiento.",
+ "{name}: {amount} this period, due {date}": "{name}: {amount} en este periodo, vence el {date}",
+ "Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.": "Las facturas se apartan un poco cada día, desde el día después de su último vencimiento hasta el día antes del siguiente. Una factura grande dentro de unas semanas resta una pequeña cantidad cada día, en lugar de todo el importe en un solo día.",
  "This is the free demo.": "Esta es la demo gratuita.",
  "Explore with sample numbers and take the tour. Changes here are not saved.": "Explora con números de ejemplo y haz el recorrido. Los cambios aquí no se guardan.",
  "Get the full planner": "Consigue el planificador completo",
@@ -1404,6 +1408,10 @@ I18N.es = {
 </script>
 <script>
 I18N.fr = {
+ "Set aside for bills due later": "Mis de côté pour les factures à venir",
+ "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Les factures sont mises de côté un peu chaque jour, pour que l’argent soit prêt la veille de chaque échéance.",
+ "{name}: {amount} this period, due {date}": "{name} : {amount} sur cette période, échéance le {date}",
+ "Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.": "Les factures sont mises de côté un peu chaque jour, du lendemain de leur dernière échéance jusqu’à la veille de la suivante. Une grosse facture dans quelques semaines retire un petit montant chaque jour, plutôt que la totalité en une seule journée.",
  "This is the free demo.": "Ceci est la démo gratuite.",
  "Explore with sample numbers and take the tour. Changes here are not saved.": "Explore avec des chiffres d’exemple et fais la visite. Les changements ici ne sont pas enregistrés.",
  "Get the full planner": "Obtenir le planificateur complet",
@@ -2240,6 +2248,10 @@ I18N.fr = {
 </script>
 <script>
 I18N.de = {
+ "Set aside for bills due later": "Für spätere Rechnungen zurückgelegt",
+ "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Rechnungen werden jeden Tag ein wenig zurückgelegt, damit das Geld am Tag vor der Fälligkeit bereitliegt.",
+ "{name}: {amount} this period, due {date}": "{name}: {amount} in diesem Zeitraum, fällig am {date}",
+ "Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.": "Rechnungen werden jeden Tag ein wenig zurückgelegt, vom Tag nach der letzten Fälligkeit bis zum Tag vor der nächsten. Eine große Rechnung in ein paar Wochen zieht jeden Tag einen kleinen Betrag ab statt des ganzen Betrags an einem Tag.",
  "This is the free demo.": "Das ist die kostenlose Demo.",
  "Explore with sample numbers and take the tour. Changes here are not saved.": "Probiere es mit Beispielzahlen aus und mach die Tour. Änderungen hier werden nicht gespeichert.",
  "Get the full planner": "Den vollständigen Planer holen",
@@ -3076,6 +3088,10 @@ I18N.de = {
 </script>
 <script>
 I18N.it = {
+ "Set aside for bills due later": "Accantonato per le bollette future",
+ "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Le bollette vengono accantonate un po’ ogni giorno, così i soldi sono pronti il giorno prima di ogni scadenza.",
+ "{name}: {amount} this period, due {date}": "{name}: {amount} in questo periodo, scade il {date}",
+ "Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.": "Le bollette vengono accantonate un po’ ogni giorno, dal giorno dopo l’ultima scadenza fino al giorno prima della successiva. Una bolletta grande tra qualche settimana toglie una piccola somma ogni giorno, invece dell’intero importo in un solo giorno.",
  "This is the free demo.": "Questa è la demo gratuita.",
  "Explore with sample numbers and take the tour. Changes here are not saved.": "Esplora con numeri di esempio e fai il tour. Le modifiche qui non vengono salvate.",
  "Get the full planner": "Ottieni il planner completo",
@@ -3912,6 +3928,10 @@ I18N.it = {
 </script>
 <script>
 I18N.pt = {
+ "Set aside for bills due later": "Reservado para contas futuras",
+ "Bills are set aside a little each day, so the money is ready the day before each one is due.": "As contas são reservadas um pouco por dia, para que o dinheiro esteja pronto no dia anterior a cada vencimento.",
+ "{name}: {amount} this period, due {date}": "{name}: {amount} neste período, vence em {date}",
+ "Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.": "As contas são reservadas um pouco por dia, do dia seguinte ao último vencimento até o dia anterior ao próximo. Uma conta grande daqui a algumas semanas tira um pequeno valor por dia, em vez do valor inteiro em um único dia.",
  "This is the free demo.": "Esta é a demonstração gratuita.",
  "Explore with sample numbers and take the tour. Changes here are not saved.": "Explore com números de exemplo e faça o tour. As alterações aqui não são salvas.",
  "Get the full planner": "Obter o planejador completo",
@@ -4896,7 +4916,8 @@ function blankState() {
   return {
     v: 1, sample: false,
     settings: { name: '', currency: defaultCurrency(), payAmount: 0, payFrequency: 'biweekly', payAnchor: today, setupDone: false, onboarded: false, lang: '',
-      plannerName: '', theme: 'editorial', photos: 'mono', font: 'system', corners: 'soft', density: 'roomy', size: 'normal', shortcutsPos: 'lower', lastBackup: null },
+      plannerName: '', theme: 'editorial', photos: 'mono', font: 'system', corners: 'soft', density: 'roomy', size: 'normal', shortcutsPos: 'lower', lastBackup: null,
+      setAsideFrom: today },
     accounts: [{ id: 'acc_main', name: t('Everyday account'), type: 'checking', opening: 0, openedOn: today, paycheck: true }],
     incomes: [], bills: [], billPaid: {}, payHistory: [], envelopes: [], envMoves: [], goals: [], debts: [],
     categories: [...CATEGORIES], debtStrategy: 'avalanche', debtExtra: 0, tx: [], waitlist: [], routines: defaultRoutines(), checkins: [], shortcuts: defaultShortcuts(),
@@ -4954,6 +4975,9 @@ function migrate(s) {
   for (const k of ['payAmount']) if (typeof out.settings[k] === 'string') out.settings[k] = Number(out.settings[k]) || 0;
   for (const a of out.accounts || []) if (typeof a.opening === 'string') a.opening = Number(a.opening) || 0;
   out.payHistory = out.payHistory || [];
+  // Bills are set aside a little each day from the day a planner first runs this version. Earlier pay
+  // periods keep the numbers the buyer already saw, so updating never makes past money look spent.
+  if (!out.settings.setAsideFrom) out.settings.setAsideFrom = todayISO();
   out.settings.plannerName = String(out.settings.plannerName || '').trim().slice(0, 40);
   // Only the Editorial and Noir looks remain; anything else falls back to Editorial, and the typewriter font to Clean
   if (!['editorial', 'noir'].includes(out.settings.theme)) out.settings.theme = 'editorial';
@@ -5068,6 +5092,47 @@ function billsIn(a, b) {
 }
 const billMonthly = bill => bill.amount * (PER_MONTH[bill.frequency] || 0);
 
+/* ---------- Setting money aside for bills ----------
+ * Each bill is put aside a little each day, from the day after its last due date (or the day it starts)
+ * until the day before it is due, so the money is ready before the bill comes out. A bill's cost no
+ * longer jumps a whole pay period because its due date moved by a day. A bill with no days to build up
+ * (due today, or added on its due day) is held in full on its due date. A bill marked paid early is held
+ * in full from today. Dates before settings.setAsideFrom keep the old rule: the whole bill on its due date.
+ */
+const SET_ASIDE_LOOKBACK = 400; // longest gap between two dates of the same bill (yearly), plus slack
+/** The days a bill's money is put aside over, and the amount for each day. */
+function setAsideWindow(bill, due) {
+  const from0 = state.settings.setAsideFrom || todayISO(), today = todayISO();
+  if (due < from0) return { start: due, end: due, perDay: bill.amount };
+  // The previous date it fell due, including from an earlier version of the same bill before an edit
+  const prev = occurrences(bill.due, bill.frequency, addDays(due, -SET_ASIDE_LOOKBACK), addDays(due, -1)).pop();
+  let start = prev ? addDays(prev, 1) : (bill.startsOn || from0);
+  if (bill.addedOn && start < bill.addedOn) start = bill.addedOn;
+  if (start < from0) start = from0;
+  let end = addDays(due, -1);
+  if (due > today && isPaid(bill, due)) end = today < start ? start : today; // paid early: the money has gone
+  if (end < start) return { start: due, end: due, perDay: bill.amount };
+  return { start, end, perDay: bill.amount / (diffDays(start, end) + 1) };
+}
+/** What bills cost the days a to b: the part for bills due by b, and the part building up for bills due after b. */
+function billsSetAside(a, b) {
+  let due = 0, ahead = 0;
+  const later = [];
+  for (const bill of state.bills) {
+    const dates = datesOf(bill, bill.due, a, addDays(b, SET_ASIDE_LOOKBACK));
+    const first = dates.findIndex(d => d > b);
+    for (const d of first === -1 ? dates : dates.slice(0, first + 1)) {
+      const w = setAsideWindow(bill, d);
+      const s = w.start > a ? w.start : a, e = w.end < b ? w.end : b;
+      if (s > e) continue;
+      const part = w.perDay * (diffDays(s, e) + 1);
+      if (d <= b) due += part;
+      else { ahead += part; later.push({ bill, due: d, part }); }
+    }
+  }
+  return { due, ahead, later: later.sort((x, y) => (x.due < y.due ? -1 : 1)) };
+}
+
 /* ---------- Changes that keep history ---------- */
 // A bill, income or pay setting that has already happened keeps its past when it is edited, paused
 // or removed, so earlier pay periods, account balances and the year in review stay true.
@@ -5081,7 +5146,8 @@ function applyItemSave(st, list, item, input, prefix, fixPast) {
   if (!item.id) {
     // A new item counts from this pay period (or its own earlier date), never further back
     const first = anchorOf(list, v), start = periodAt(0).start;
-    st[list].push({ id: uid(prefix), startsOn: first && first < start ? first : start, ...v });
+    // addedOn: money is only ever set aside for a bill from the day it was added, never before
+    st[list].push({ id: uid(prefix), startsOn: first && first < start ? first : start, ...(list === 'bills' ? { addedOn: today } : {}), ...v });
     return;
   }
   const cur = byId(st[list], item.id);
@@ -5216,6 +5282,8 @@ function periodSummary(p) {
   const bills = billsIn(p.start, p.end);
   const billsTotal = sum(bills, b => b.bill.amount);
   const billsPaid = sum(bills.filter(b => b.paid), b => b.bill.amount);
+  const aside = billsSetAside(p.start, p.end);
+  const billsCost = aside.due + aside.ahead;
 
   const envs = envActive(p).map(e => ({ env: e, ...envStatus(e, p) }));
   const carry = sum(envs, e => e.carry);
@@ -5233,7 +5301,7 @@ function periodSummary(p) {
 
   const txs = spendsIn(p.start, p.end);
   const spent = sum(txs, x => x.amount);
-  const safe = round2(income + carry - billsTotal - envReserve - goalsSetAside - goalsExtra - spent);
+  const safe = round2(income + carry - billsCost - envReserve - goalsSetAside - goalsExtra - spent);
 
   const len = periodDays(p);
   const current = !future && p.end >= t;
@@ -5249,6 +5317,7 @@ function periodSummary(p) {
   else if (elapsed && freeSpent / elapsed > allowance) status = 'Watch it';
 
   return { p, future, current, income, mainLanded, otherLanded, toArrive, others, pays, bills, billsTotal, billsPaid,
+    billsCost, billsDue: aside.due, billsAhead: aside.ahead, billsLater: aside.later,
     envs, carry, envReserve, envPlanned, envUsedTotal, goals, goalsSetAside, goalsExtra, goalsIn,
     txs, spent, safe, len, elapsed, daysLeft, perDay: daysLeft ? safe / daysLeft : 0, avgDaily, status };
 }
@@ -5289,6 +5358,7 @@ function sampleState() {
   s.sample = true;
   Object.assign(s.settings, { name: t('Sam'), currency: defaultCurrency(), payAmount: 8800, payFrequency: 'biweekly', payAnchor: addDays(today, -7), setupDone: true });
   const opened = addDays(today, -84);
+  s.settings.setAsideFrom = opened; // the sample has been setting bills aside all along
   s.accounts = [
     { id: 'acc_main', name: t('Everyday account'), type: 'checking', opening: 6200, openedOn: opened, paycheck: true },
     { id: 'acc_save', name: t('Rainy day'), type: 'savings', opening: 18500, openedOn: opened },
@@ -5805,9 +5875,10 @@ VIEWS.today = () => {
       <p class="pace">${t('Day {day} of {len} in this pay period · you’ve spent about {amount} a day', { day: S.elapsed, len: S.len, amount: money(S.avgDaily) })}</p></div>` : ''}</section>`;
   const line = (sign, label, v) => `<div class="line"><span>${sign} ${label}</span><b>${money(v)}</b></div>`;
   const breakdown = `<div class="card breakdown" data-tour="breakdown"><div class="card-head"><h2>${t('How this number is made')}</h2><a class="btn sm" href="#guide">${t('Why')}</a></div>
-    ${line('+', t('Income this period'), S.income)}${line('+', t('Left over from before'), S.carry)}${line('−', t('Bills this period'), S.billsTotal)}
+    ${line('+', t('Income this period'), S.income)}${line('+', t('Left over from before'), S.carry)}${line('−', t('Bills due this period'), S.billsDue)}${line('−', t('Set aside for bills due later'), S.billsAhead)}
     ${line('−', t('Kept in envelopes'), S.envReserve)}${line('−', t('Set aside for goals'), S.goalsSetAside + S.goalsExtra)}${line('−', t('Already spent'), S.spent)}
     <div class="line total"><span>= ${t('Safe to spend')}</span><span>${money(S.safe)}</span></div>
+    ${S.billsLater.length ? `<p class="small muted" style="margin:10px 0 0">${t('Bills are set aside a little each day, so the money is ready the day before each one is due.')} ${S.billsLater.slice(0, 3).map(x => esc(t('{name}: {amount} this period, due {date}', { name: x.bill.name, amount: money(x.part), date: fmtShort(x.due) }))).join(' · ')}</p>` : ''}
     ${S.toArrive ? `<p class="small muted" style="margin:10px 0 0">${t('{amount} of other income is still on its way. It counts on the day it lands.', { amount: money(S.toArrive) })}</p>` : ''}</div>`;
   const shortcuts = `<div class="card" data-tour="shortcuts"><div class="card-head"><h2>${t('One tap')}</h2><a class="btn sm" href="#customize">${t('Edit')}</a></div>
     <div class="shortcuts">${shortcutButtons()}
@@ -5819,7 +5890,7 @@ VIEWS.today = () => {
   const cats = byCategory(S.txs);
   const top = cats.slice(0, 5), rest = sum(cats.slice(5), c => c.amt);
   const parts = [...top.map(c => ({ l: t(c.cat), v: c.amt })), ...(rest ? [{ l: t('Everything else'), v: rest }] : [])];
-  const split = [[t('Bills'), S.billsTotal, 'var(--c2)'], [t('Envelopes'), S.envReserve, 'var(--c3)'], [t('Goals'), S.goalsSetAside + S.goalsExtra, 'var(--c4)'], [t('Spent'), S.spent, 'var(--c6)'], [t('Left'), Math.max(0, S.safe), 'var(--accent)']];
+  const split = [[t('Bills'), S.billsCost, 'var(--c2)'], [t('Envelopes'), S.envReserve, 'var(--c3)'], [t('Goals'), S.goalsSetAside + S.goalsExtra, 'var(--c4)'], [t('Spent'), S.spent, 'var(--c6)'], [t('Left'), Math.max(0, S.safe), 'var(--accent)']];
   const splitTotal = sum(split, x => x[1]) || 1;
   const goalTarget = sum(state.goals, g => g.target), goalSavedAll = sum(state.goals, goalSaved);
   const unpaid = S.bills.filter(b => !b.paid);
@@ -6152,7 +6223,8 @@ VIEWS.guide = () => {
     ${li(t('Check Safe to spend.'), t('That is what you can spend before payday without touching bills, envelopes or goals.'))}</ol>
     <div class="row wrap mt"><button class="btn" data-act="tour">${t('Take the 2-minute tour')}</button></div></div></div>
   <div class="card"><h2>${t('Safe to spend, explained')}</h2><p class="muted">${t('Each pay period, {app} starts with the money that has come in, then takes away everything that already has a job:', { app: APP.name })}</p>
-    <div class="breakdown" style="max-width:420px"><div class="line"><span>+ ${t('Income that has landed')}</span></div><div class="line"><span>+ ${t('Envelope money rolled over')}</span></div><div class="line"><span>− ${t('Bills due this period')}</span></div><div class="line"><span>− ${t('What is still in your envelopes')}</span></div><div class="line"><span>− ${t('What is set aside for goals')}</span></div><div class="line"><span>− ${t('What you have already spent')}</span></div><div class="line total"><span>= ${t('Safe to spend')}</span></div></div>
+    <div class="breakdown" style="max-width:420px"><div class="line"><span>+ ${t('Income that has landed')}</span></div><div class="line"><span>+ ${t('Envelope money rolled over')}</span></div><div class="line"><span>− ${t('Bills due this period')}</span></div><div class="line"><span>− ${t('Set aside for bills due later')}</span></div><div class="line"><span>− ${t('What is still in your envelopes')}</span></div><div class="line"><span>− ${t('What is set aside for goals')}</span></div><div class="line"><span>− ${t('What you have already spent')}</span></div><div class="line total"><span>= ${t('Safe to spend')}</span></div></div>
+    <p class="muted small">${t('Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.')}</p>
     <p class="muted small">${t('Moving money between accounts or into savings does not change it. Income only counts once its date arrives.')}</p></div>
   <div class="grid g2"><div class="card"><h2>${t('Keeping your data safe')}</h2><p class="muted small">${t('Everything you enter stays in this browser, on this device. Nothing is uploaded, and there is no account to hack. That also means a few things are worth knowing:')}</p>
       <ul class="small guide-list">${li(t('Download a backup now and then'), t('(Settings → Download backup). {app} reminds you when it has been a while.', { app: APP.name }))}
