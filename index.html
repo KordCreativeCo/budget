@@ -116,7 +116,7 @@ h3 { font-size: 0.95rem; }
 .stack { display: flex; flex-direction: column; gap: var(--gap); }
 .row { display: flex; align-items: center; gap: 10px; }
 .row.wrap { flex-wrap: wrap; }
-.spread { justify-content: space-between; }
+.spread { justify-content: space-between; flex-wrap: wrap; row-gap: 2px; }
 .mt { margin-top: var(--gap); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
 .btn:hover { background: var(--surface-2); }
@@ -146,7 +146,7 @@ h3 { font-size: 0.95rem; }
 .tile .value { font-size: 1.4rem; font-weight: 750; margin-top: 4px; font-variant-numeric: tabular-nums; }
 .tile .hint { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 .list { display: flex; flex-direction: column; }
-.item { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+.item { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
 .item:first-child { border-top: none; }
 .item .grow { flex: 1; min-width: 0; }
 .item .title { font-weight: 600; }
@@ -356,7 +356,7 @@ h2 { font-family: var(--display); font-weight: var(--h2-weight); font-size: var(
 .ob-start { display: grid; gap: 10px; justify-items: center; }
 .ob-start .tiny { margin-bottom: 4px; }
 @media (max-width: 860px) {
-  .onboard { grid-template-columns: 1fr; grid-template-rows: 170px 1fr; }
+  .onboard { grid-template-columns: minmax(0, 1fr); grid-template-rows: 170px 1fr; }
   .ob-panel { align-items: flex-start; padding: 26px 20px 32px; }
 }
 
@@ -390,7 +390,8 @@ a { text-underline-offset: 3px; text-decoration-thickness: 1px; }
 /* Buyers can keep their own photos in color */
 [data-photos="color"] .photo img, [data-photos="color"] .photo-thumb img { filter: none; }
 .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; }
-.photo-slot { display: grid; gap: 8px; align-content: start; }
+.photo-slot { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-content: start; min-width: 0; }
+.photo-slot b { overflow-wrap: anywhere; }
 .photo-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-2); border-radius: var(--r-sm); }
 .photo-empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 8px; }
 .page-banner { height: 220px; margin: 0 0 24px; border-radius: var(--r-sm); }
@@ -487,7 +488,7 @@ a { text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .shell.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 30; }
   .icon-btn.menu-btn { display: grid; }
   .main { padding: 16px 16px 96px; }
-  .g2 { grid-template-columns: 1fr; }
+  .g2 { grid-template-columns: minmax(0, 1fr); }
   .fab { display: inline-flex; position: fixed; right: 16px; bottom: 18px; z-index: 20; box-shadow: 0 8px 24px rgba(0,0,0,0.2); padding: 13px 20px; }
   .cal .day { min-height: 64px; font-size: 0.75rem; padding: 4px; }
   .cal .tag { display: none; }
@@ -568,6 +569,17 @@ const N_ = s => s;
 </script>
 <script>
 I18N.es = {
+ "Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.": "El dinero que no gastas en un periodo de pago pasa al siguiente, y lo mismo ocurre si gastas de más. Lo verás como Sobrante del periodo anterior. Paga las facturas y anota tus gastos sobre la marcha para que coincida con tu banco.",
+ "Ended": "Terminó",
+ "First bill": "Primera factura",
+ "left in this pay period": "quedan en este periodo de pago",
+ "Left over from last period": "Sobrante del periodo anterior",
+ "Not marked paid yet": "Aún sin marcar como pagadas",
+ "Overdue": "Vencidas",
+ "overdue": "vencida",
+ "Overspent last period": "Gasto de más el periodo anterior",
+ "Payday is tomorrow. Whatever you don’t spend carries into your next pay period.": "Mañana es día de pago. Lo que no gastes pasa a tu próximo periodo de pago.",
+ "{name} marked paid. It was already set aside, so Safe to spend stays the same.": "{name} marcada como pagada. Ya estaba apartada, así que tu Disponible para gastar no cambia.",
  "Set aside for bills due later": "Apartado para facturas futuras",
  "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Las facturas se apartan un poco cada día, para que el dinero esté listo el día antes de cada vencimiento.",
  "{name}: {amount} this period, due {date}": "{name}: {amount} en este periodo, vence el {date}",
@@ -878,7 +890,6 @@ I18N.es = {
  "Learning": "Formación",
  "Left": "Queda",
  "Left at the end of the period": "Lo que queda al final del periodo",
- "Left over from before": "Sobrante de antes",
  "little rituals": "pequeños rituales",
  "Load sample": "Cargar ejemplo",
  "Load sample data": "Cargar datos de ejemplo",
@@ -1397,7 +1408,6 @@ I18N.es = {
  "What’s left for everyday spending, after bills, envelopes and goals.": "Lo que queda para el gasto diario, después de facturas, sobres y metas.",
  "Last payday": "Último día de pago",
  "Day {day} of {len} in this pay period · you’ve spent about {amount} a day": "Día {day} de {len} de este periodo de pago · has gastado unos {amount} al día",
- "to spend today": "para gastar hoy",
  "to spend each day until payday": "para gastar cada día hasta el día de pago",
  "{amount} safe to spend in total, {n} day left": "{amount} seguros para gastar en total, queda {n} día",
  "{amount} safe to spend in total, {n} days left": "{amount} seguros para gastar en total, quedan {n} días",
@@ -1408,6 +1418,17 @@ I18N.es = {
 </script>
 <script>
 I18N.fr = {
+ "Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.": "L’argent que vous ne dépensez pas sur une période de paie passe à la suivante, tout comme un dépassement. Vous le verrez comme Reste de la période précédente. Payez vos factures et notez vos dépenses au fil de l’eau pour rester fidèle à votre banque.",
+ "Ended": "Terminée",
+ "First bill": "Première facture",
+ "left in this pay period": "restants sur cette période de paie",
+ "Left over from last period": "Reste de la période précédente",
+ "Not marked paid yet": "Pas encore marquées payées",
+ "Overdue": "En retard",
+ "overdue": "en retard",
+ "Overspent last period": "Dépassement de la période précédente",
+ "Payday is tomorrow. Whatever you don’t spend carries into your next pay period.": "La paie arrive demain. Ce que vous ne dépensez pas passe sur votre prochaine période de paie.",
+ "{name} marked paid. It was already set aside, so Safe to spend stays the same.": "{name} marquée payée. Elle était déjà mise de côté, donc votre Disponible à dépenser ne change pas.",
  "Set aside for bills due later": "Mis de côté pour les factures à venir",
  "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Les factures sont mises de côté un peu chaque jour, pour que l’argent soit prêt la veille de chaque échéance.",
  "{name}: {amount} this period, due {date}": "{name} : {amount} sur cette période, échéance le {date}",
@@ -1718,7 +1739,6 @@ I18N.fr = {
  "Learning": "Formation",
  "Left": "Restant",
  "Left at the end of the period": "Restant en fin de période",
- "Left over from before": "Restant de la période précédente",
  "little rituals": "petits rituels",
  "Load sample": "Charger l’exemple",
  "Load sample data": "Charger les données d’exemple",
@@ -2237,7 +2257,6 @@ I18N.fr = {
  "What’s left for everyday spending, after bills, envelopes and goals.": "Ce qui reste pour les dépenses courantes, après les factures, les enveloppes et les objectifs.",
  "Last payday": "Dernière paie",
  "Day {day} of {len} in this pay period · you’ve spent about {amount} a day": "Jour {day} sur {len} de cette période de paie · vous avez dépensé environ {amount} par jour",
- "to spend today": "à dépenser aujourd’hui",
  "to spend each day until payday": "à dépenser chaque jour jusqu’à la paie",
  "{amount} safe to spend in total, {n} day left": "{amount} à dépenser en tout, il reste {n} jour",
  "{amount} safe to spend in total, {n} days left": "{amount} à dépenser en tout, il reste {n} jours",
@@ -2248,6 +2267,17 @@ I18N.fr = {
 </script>
 <script>
 I18N.de = {
+ "Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.": "Geld, das du in einem Lohnzeitraum nicht ausgibst, geht in den nächsten über, ebenso zu viel Ausgegebenes. Du siehst es als Übrig aus dem letzten Zeitraum. Bezahle Rechnungen und trage Ausgaben laufend ein, damit es zu deinem Konto passt.",
+ "Ended": "Endete",
+ "First bill": "Erste Rechnung",
+ "left in this pay period": "übrig in diesem Lohnzeitraum",
+ "Left over from last period": "Übrig aus dem letzten Zeitraum",
+ "Not marked paid yet": "Noch nicht als bezahlt markiert",
+ "Overdue": "Überfällig",
+ "overdue": "überfällig",
+ "Overspent last period": "Zu viel ausgegeben im letzten Zeitraum",
+ "Payday is tomorrow. Whatever you don’t spend carries into your next pay period.": "Morgen ist Zahltag. Was du nicht ausgibst, geht in deinen nächsten Lohnzeitraum über.",
+ "{name} marked paid. It was already set aside, so Safe to spend stays the same.": "{name} als bezahlt markiert. Das Geld war schon zurückgelegt, also bleibt dein Frei verfügbar gleich.",
  "Set aside for bills due later": "Für spätere Rechnungen zurückgelegt",
  "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Rechnungen werden jeden Tag ein wenig zurückgelegt, damit das Geld am Tag vor der Fälligkeit bereitliegt.",
  "{name}: {amount} this period, due {date}": "{name}: {amount} in diesem Zeitraum, fällig am {date}",
@@ -2558,7 +2588,6 @@ I18N.de = {
  "Learning": "Lernen",
  "Left": "Übrig",
  "Left at the end of the period": "Übrig am Ende des Zeitraums",
- "Left over from before": "Übrig von früher",
  "little rituals": "kleine Rituale",
  "Load sample": "Beispiel laden",
  "Load sample data": "Beispieldaten laden",
@@ -3077,7 +3106,6 @@ I18N.de = {
  "What’s left for everyday spending, after bills, envelopes and goals.": "Was für alltägliche Ausgaben bleibt, nach Rechnungen, Umschlägen und Zielen.",
  "Last payday": "Letzter Zahltag",
  "Day {day} of {len} in this pay period · you’ve spent about {amount} a day": "Tag {day} von {len} in diesem Zeitraum · du hast etwa {amount} pro Tag ausgegeben",
- "to spend today": "heute verfügbar",
  "to spend each day until payday": "pro Tag verfügbar bis zum Zahltag",
  "{amount} safe to spend in total, {n} day left": "Insgesamt {amount} verfügbar, noch {n} Tag",
  "{amount} safe to spend in total, {n} days left": "Insgesamt {amount} verfügbar, noch {n} Tage",
@@ -3088,6 +3116,17 @@ I18N.de = {
 </script>
 <script>
 I18N.it = {
+ "Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.": "I soldi che non spendi in un periodo di paga passano al successivo, e lo stesso vale se spendi troppo. Li vedrai come Avanzo del periodo precedente. Paga le bollette e registra le spese man mano, così i conti restano fedeli alla tua banca.",
+ "Ended": "Terminato",
+ "First bill": "Prima bolletta",
+ "left in this pay period": "rimasti in questo periodo di paga",
+ "Left over from last period": "Avanzo del periodo precedente",
+ "Not marked paid yet": "Non ancora segnate come pagate",
+ "Overdue": "Scadute",
+ "overdue": "scaduta",
+ "Overspent last period": "Speso in più nel periodo precedente",
+ "Payday is tomorrow. Whatever you don’t spend carries into your next pay period.": "Domani è giorno di paga. Quello che non spendi passa al prossimo periodo di paga.",
+ "{name} marked paid. It was already set aside, so Safe to spend stays the same.": "{name} segnata come pagata. Era già stata accantonata, quindi Disponibile da spendere resta uguale.",
  "Set aside for bills due later": "Accantonato per le bollette future",
  "Bills are set aside a little each day, so the money is ready the day before each one is due.": "Le bollette vengono accantonate un po’ ogni giorno, così i soldi sono pronti il giorno prima di ogni scadenza.",
  "{name}: {amount} this period, due {date}": "{name}: {amount} in questo periodo, scade il {date}",
@@ -3398,7 +3437,6 @@ I18N.it = {
  "Learning": "Studio",
  "Left": "Resta",
  "Left at the end of the period": "Rimasto a fine periodo",
- "Left over from before": "Avanzato da prima",
  "little rituals": "piccoli rituali",
  "Load sample": "Carica l’esempio",
  "Load sample data": "Carica dati di esempio",
@@ -3917,7 +3955,6 @@ I18N.it = {
  "What’s left for everyday spending, after bills, envelopes and goals.": "Ciò che resta per le spese quotidiane, dopo bollette, buste e obiettivi.",
  "Last payday": "Ultimo giorno di paga",
  "Day {day} of {len} in this pay period · you’ve spent about {amount} a day": "Giorno {day} di {len} di questo periodo di paga · hai speso circa {amount} al giorno",
- "to spend today": "da spendere oggi",
  "to spend each day until payday": "da spendere ogni giorno fino al giorno di paga",
  "{amount} safe to spend in total, {n} day left": "{amount} spendibili in totale, resta {n} giorno",
  "{amount} safe to spend in total, {n} days left": "{amount} spendibili in totale, restano {n} giorni",
@@ -3928,6 +3965,17 @@ I18N.it = {
 </script>
 <script>
 I18N.pt = {
+ "Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.": "O dinheiro que você não gasta em um período de pagamento passa para o próximo, e o mesmo vale para gastos a mais. Você verá isso como Sobra do período anterior. Pague as contas e registre os gastos no dia a dia para que tudo bata com o seu banco.",
+ "Ended": "Terminou",
+ "First bill": "Primeira conta",
+ "left in this pay period": "restantes neste período de pagamento",
+ "Left over from last period": "Sobra do período anterior",
+ "Not marked paid yet": "Ainda não marcadas como pagas",
+ "Overdue": "Em atraso",
+ "overdue": "em atraso",
+ "Overspent last period": "Gasto a mais no período anterior",
+ "Payday is tomorrow. Whatever you don’t spend carries into your next pay period.": "Amanhã é dia de pagamento. O que você não gastar passa para o próximo período de pagamento.",
+ "{name} marked paid. It was already set aside, so Safe to spend stays the same.": "{name} marcada como paga. Já estava separada, então o Livre para gastar continua igual.",
  "Set aside for bills due later": "Reservado para contas futuras",
  "Bills are set aside a little each day, so the money is ready the day before each one is due.": "As contas são reservadas um pouco por dia, para que o dinheiro esteja pronto no dia anterior a cada vencimento.",
  "{name}: {amount} this period, due {date}": "{name}: {amount} neste período, vence em {date}",
@@ -4238,7 +4286,6 @@ I18N.pt = {
  "Learning": "Estudos",
  "Left": "Resta",
  "Left at the end of the period": "Sobra no fim do período",
- "Left over from before": "Sobra de antes",
  "little rituals": "pequenos rituais",
  "Load sample": "Carregar exemplo",
  "Load sample data": "Carregar dados de exemplo",
@@ -4757,7 +4804,6 @@ I18N.pt = {
  "What’s left for everyday spending, after bills, envelopes and goals.": "O que sobra para os gastos do dia a dia, depois de contas, envelopes e objetivos.",
  "Last payday": "Último dia de pagamento",
  "Day {day} of {len} in this pay period · you’ve spent about {amount} a day": "Dia {day} de {len} deste período de pagamento · gastou cerca de {amount} por dia",
- "to spend today": "para gastar hoje",
  "to spend each day until payday": "para gastar por dia até ao dia de pagamento",
  "{amount} safe to spend in total, {n} day left": "{amount} para gastar no total, falta {n} dia",
  "{amount} safe to spend in total, {n} days left": "{amount} para gastar no total, faltam {n} dias",
@@ -4917,7 +4963,7 @@ function blankState() {
     v: 1, sample: false,
     settings: { name: '', currency: defaultCurrency(), payAmount: 0, payFrequency: 'biweekly', payAnchor: today, setupDone: false, onboarded: false, lang: '',
       plannerName: '', theme: 'editorial', photos: 'mono', font: 'system', corners: 'soft', density: 'roomy', size: 'normal', shortcutsPos: 'lower', lastBackup: null,
-      setAsideFrom: today },
+      setAsideFrom: today, rollFrom: today },
     accounts: [{ id: 'acc_main', name: t('Everyday account'), type: 'checking', opening: 0, openedOn: today, paycheck: true }],
     incomes: [], bills: [], billPaid: {}, payHistory: [], envelopes: [], envMoves: [], goals: [], debts: [],
     categories: [...CATEGORIES], debtStrategy: 'avalanche', debtExtra: 0, tx: [], waitlist: [], routines: defaultRoutines(), checkins: [], shortcuts: defaultShortcuts(),
@@ -4935,14 +4981,17 @@ function load() {
     raw = [APP.storageKey, ...APP.legacyKeys].map(k => localStorage.getItem(k)).find(Boolean);
   } catch (e) { storage.ok = false; return false; }
   if (!raw) return false;
-  try { state = migrate(JSON.parse(raw)); return true; } catch (e) {
+  try { state = migrate(JSON.parse(raw)); REV++; return true; } catch (e) {
     // Never overwrite data we cannot read: keep a copy the buyer can download and send for help
     storage.unreadable = raw;
     try { localStorage.setItem(`${APP.storageKey}.unreadable-${todayISO()}`, raw); } catch (_) { /* nothing more we can do */ }
     return false;
   }
 }
+/** Bumped on every saved change, so figures worked out from earlier periods are recalculated. */
+let REV = 0;
 function save() {
+  REV++;
   if (DEMO) return;
   state.settings.lastChange = todayISO();
   try { localStorage.setItem(APP.storageKey, JSON.stringify(state)); storage.ok = true; } catch (e) { storage.ok = false; }
@@ -4978,6 +5027,11 @@ function migrate(s) {
   // Bills are set aside a little each day from the day a planner first runs this version. Earlier pay
   // periods keep the numbers the buyer already saw, so updating never makes past money look spent.
   if (!out.settings.setAsideFrom) out.settings.setAsideFrom = todayISO();
+  // Unspent money carries into the next pay period, and unpaid bills show as overdue, from the day a
+  // planner first runs this version. Earlier periods keep the numbers the buyer already saw.
+  if (!out.settings.rollFrom) out.settings.rollFrom = todayISO();
+  for (const k of ['debtExtra']) if (typeof out[k] === 'string') out[k] = Number(out[k]) || 0;
+  for (const w of out.waitlist || []) if (typeof w.waitDays === 'string') w.waitDays = Number(w.waitDays) || 0;
   out.settings.plannerName = String(out.settings.plannerName || '').trim().slice(0, 40);
   // Only the Editorial and Noir looks remain; anything else falls back to Editorial, and the typewriter font to Clean
   if (!['editorial', 'noir'].includes(out.settings.theme)) out.settings.theme = 'editorial';
@@ -5091,6 +5145,17 @@ function billsIn(a, b) {
   return out.sort((x, y) => (x.due < y.due ? -1 : x.due > y.due ? 1 : 0));
 }
 const billMonthly = bill => bill.amount * (PER_MONTH[bill.frequency] || 0);
+/** Bills from recent weeks that were never marked paid, oldest first. Only dates since this version
+ * started are checked, so a buyer who never used the Paid button isn't shown a wall of old bills. */
+function overdueBills() {
+  const t = todayISO(), floor = addDays(t, -62), from0 = state.settings.rollFrom || t;
+  return billsIn(from0 > floor ? from0 : floor, addDays(t, -1)).filter(b => !b.paid && (!b.bill.addedOn || b.due >= b.bill.addedOn));
+}
+/** The first unpaid bill: an overdue one first, otherwise the next one due from today. */
+function nextUnpaidBill(days = 60) {
+  const t = todayISO();
+  return overdueBills()[0] || billsIn(t, addDays(t, days)).find(b => !b.paid);
+}
 
 /* ---------- Setting money aside for bills ----------
  * Each bill is put aside a little each day, from the day after its last due date (or the day it starts)
@@ -5136,9 +5201,20 @@ function billsSetAside(a, b) {
 /* ---------- Changes that keep history ---------- */
 // A bill, income or pay setting that has already happened keeps its past when it is edited, paused
 // or removed, so earlier pay periods, account balances and the year in review stay true.
-const SHAPE = { bills: ['amount', 'frequency', 'due', 'accountId'], incomes: ['amount', 'frequency', 'date', 'accountId'] };
+const SHAPE = { bills: ['amount', 'frequency', 'due', 'accountId', 'autopay'], incomes: ['amount', 'frequency', 'date', 'accountId'] };
 const anchorOf = (list, item) => (list === 'bills' ? item.due : item.date);
 const hasPast = (list, item) => datesOf(item, anchorOf(list, item), addDays(todayISO(), -800), addDays(todayISO(), -1)).length > 0;
+/**
+ * The day a stop, pause or change takes effect. Normally today, but when today's payment has already
+ * happened (income that landed today, or a bill paid or on autopay today) it stays as it was and the
+ * change starts tomorrow, so the money that really moved today is kept.
+ */
+function changeFrom(list, item) {
+  const today = todayISO();
+  if (!datesOf(item, anchorOf(list, item), today, today).length) return today;
+  const done = list === 'incomes' || isPaid(item, today);
+  return done ? addDays(today, 1) : today;
+}
 /** Add or edit a bill or income. fixPast rewrites it everywhere (for correcting a typo). */
 function applyItemSave(st, list, item, input, prefix, fixPast) {
   const today = todayISO();
@@ -5151,25 +5227,26 @@ function applyItemSave(st, list, item, input, prefix, fixPast) {
     return;
   }
   const cur = byId(st[list], item.id);
+  const from = changeFrom(list, cur);
   if ('paused' in v && !!v.paused !== !!cur.paused) {
-    if (v.paused) cur.pauses = [...(cur.pauses || []), { from: today, to: '' }];
+    if (v.paused) cur.pauses = [...(cur.pauses || []), { from, to: '' }];
     else if (cur.pauses) cur.pauses = cur.pauses.map(x => (x.to ? x : { ...x, to: addDays(today, -1) }));
   }
   const reshaped = SHAPE[list].some(k => String(v[k] == null ? '' : v[k]) !== String(cur[k] == null ? '' : cur[k]));
   if (reshaped && !fixPast && hasPast(list, cur)) {
-    // The old version stops today; the changed version takes over from today
-    const next = { ...cur, ...v, id: uid(prefix), startsOn: today };
+    // The old version stops today (or tomorrow, if today's payment already happened); the changed version takes over then
+    const next = { ...cur, ...v, id: uid(prefix), startsOn: from };
     delete next.endedOn;
-    cur.endedOn = today;
+    cur.endedOn = from;
     if (list === 'bills') for (const k of Object.keys(st.billPaid)) {
       const [id, due] = k.split('@');
-      if (id === cur.id && due >= today) { st.billPaid[`${next.id}@${due}`] = st.billPaid[k]; delete st.billPaid[k]; }
+      if (id === cur.id && due >= from) { st.billPaid[`${next.id}@${due}`] = st.billPaid[k]; delete st.billPaid[k]; }
     }
     st[list].push(next);
   } else Object.assign(cur, v);
 }
-/** Stop a bill or income from today, keeping the payments that already happened. */
-function stopItem(st, list, id) { byId(st[list], id).endedOn = todayISO(); }
+/** Stop a bill or income from today, keeping the payments that already happened (today's too, if it went out). */
+function stopItem(st, list, id) { const item = byId(st[list], id); item.endedOn = changeFrom(list, item); }
 /** Change the main pay. Paydays before today keep the old pay unless fixPast corrects a mistake. */
 function applyPayChange(st, v, fixPast) {
   const was = st.settings, account = paycheckAccount().id;
@@ -5185,16 +5262,32 @@ function envMovesIn(env, p) {
   return sum(state.envMoves.filter(m => inRange(m.date, p.start, p.end)), m => (m.to === env.id ? m.amount : 0) - (m.from === env.id ? m.amount : 0));
 }
 function envUsed(env, p) { return sum(spendsIn(p.start, p.end).filter(t => t.envelopeId === env.id), t => t.amount); }
-function envCarry(env, p, depth = 0) {
-  if (!env.rollover || depth > 8) return 0;
-  const prev = periodContaining(addDays(p.start, -1));
-  if ((env.createdOn || '0000') > prev.end) return 0;
-  const avail = env.planned + envCarry(env, prev, depth + 1) + envMovesIn(env, prev) - envUsed(env, prev);
-  return Math.max(0, avail);
+/** The planned amount that applied in a period. Changing it changes this period on, never the past. */
+function envPlanned(env, p) {
+  const h = (env.plannedHistory || []).find(x => x.until >= p.start);
+  return h ? h.planned : env.planned;
+}
+/** Record a new planned amount so earlier periods (and their rollover) keep the old one. */
+function setEnvPlanned(env, planned) {
+  const start = periodAt(0).start;
+  if (planned === env.planned) return;
+  if ((env.createdOn || '0000') < start) env.plannedHistory = [...(env.plannedHistory || []), { until: addDays(start, -1), planned: env.planned }];
+  env.planned = planned;
+}
+/** What rolls into period p, worked forward from the envelope's first period, however long ago. */
+function envCarry(env, p) {
+  if (!env.rollover) return 0;
+  const created = env.createdOn || '0000';
+  let q = periodContaining(created > '0000' ? created : dataStart()), carry = 0;
+  for (let n = 0; q.start < p.start && n < 2000; n++) {
+    if (created <= q.end) carry = Math.max(0, envPlanned(env, q) + carry + envMovesIn(env, q) - envUsed(env, q));
+    q = periodContaining(addDays(q.end, 1));
+  }
+  return carry;
 }
 function envStatus(env, p) {
   const carry = envCarry(env, p), moves = envMovesIn(env, p), used = envUsed(env, p);
-  const total = env.planned + carry + moves;
+  const total = envPlanned(env, p) + carry + moves;
   return { carry, moves, used, total, left: total - used, reserve: Math.max(0, total - used) };
 }
 const envActive = p => state.envelopes.filter(e => (e.createdOn || '0000') <= p.end);
@@ -5208,9 +5301,9 @@ function goalProjection(g) {
   if (left <= 0) return { done: true };
   if (!g.setAside) return { never: true };
   const periods = Math.ceil(left / g.setAside);
-  const p = periodAt(0);
-  const len = periodDays(p);
-  return { periods, date: addDays(p.start, periods * len) };
+  // Count real paydays ahead (months differ in length), not this period's length times the count
+  const p = periodAt(0), pays = payDates(addDays(p.start, 1), addDays(p.start, periods * 32 + 40));
+  return { periods, date: pays[periods - 1] || addDays(p.start, periods * periodDays(p)) };
 }
 
 /* ---------- Debts ---------- */
@@ -5240,14 +5333,19 @@ function accountBalance(acc, asOf = todayISO()) {
   const out = isCard ? 1 : -1; // effect of money leaving this account
   let b = acc.opening || 0;
   const after = acc.openedOn || '0000';
-  const live = d => d > after && d <= asOf;
+  // Paydays and bills on the opening day are already in the opening balance; spends logged that day are not
+  const live = d => d >= after && d <= asOf;
   b += sum(payDays(addDays(after, 1), asOf).filter(x => x.account === acc.id), x => x.amount);
   for (const inc of state.incomes) {
     if ((inc.accountId || paycheckAccount().id) !== acc.id) continue;
     b += incomeDates(inc, addDays(after, 1), asOf).length * inc.amount;
   }
-  for (const { bill, due, paid } of billsIn(addDays(after, 1), asOf)) {
-    if (paid && (bill.accountId || paycheckAccount().id) === acc.id) b += out * bill.amount;
+  // A bill leaves the account on the day it was marked paid (early or late), or on its due date for autopay
+  for (const { bill, due, paid } of billsIn(addDays(after, 1), addDays(asOf, 400))) {
+    if (!paid || (bill.accountId || paycheckAccount().id) !== acc.id) continue;
+    const mark = state.billPaid[paidKey(bill.id, due)];
+    const on = mark && mark.on && mark.on < due ? mark.on : due;
+    if (on > after && on <= asOf) b += out * bill.amount;
   }
   for (const t of state.tx) {
     if (!live(t.date)) continue;
@@ -5265,6 +5363,28 @@ function netBalance() {
 }
 
 /* ---------- The period summary (Safe to spend) ---------- */
+/*
+ * Money left unspent at the end of a pay period carries into the next one ("Left over from last
+ * period"), and so does overspending. That covers Safe to spend plus whatever was still kept in
+ * envelopes that don't roll over themselves. A period that hasn't ended yet passes on what is left
+ * so far, so an upcoming period's projection assumes today's leftover isn't spent.
+ * Only periods from settings.rollFrom on pass money forward, so earlier periods keep their numbers.
+ */
+const _leftMemo = { key: '', map: new Map() };
+function leftoverInto(p) {
+  const from = state.settings.rollFrom;
+  if (!from) return 0;
+  const prev = periodContaining(addDays(p.start, -1));
+  if (prev.end < from) return 0;
+  const key = `${REV}|${todayISO()}`;
+  if (_leftMemo.key !== key || _leftMemo.state !== state) { _leftMemo.key = key; _leftMemo.state = state; _leftMemo.map = new Map(); }
+  if (!_leftMemo.map.has(prev.start)) {
+    const S = periodSummary(prev);
+    const loose = sum(S.envs.filter(e => !e.env.rollover), e => e.reserve);
+    _leftMemo.map.set(prev.start, round2(S.safe + loose));
+  }
+  return _leftMemo.map.get(prev.start);
+}
 function periodSummary(p) {
   const t = todayISO();
   const future = p.start > t;
@@ -5288,20 +5408,23 @@ function periodSummary(p) {
   const envs = envActive(p).map(e => ({ env: e, ...envStatus(e, p) }));
   const carry = sum(envs, e => e.carry);
   const envReserve = sum(envs, e => e.reserve);
-  const envPlanned = sum(envs, e => e.env.planned + e.carry + e.moves);
+  const envPlannedTotal = sum(envs, e => e.total);
   const envUsedTotal = sum(envs, e => e.used);
 
   const goals = state.goals.filter(g => (g.createdOn || '0000') <= p.end && (!goalDone(g) || goalContribs(g, p.start, p.end).length));
   let goalsSetAside = 0, goalsExtra = 0, goalsIn = 0;
   for (const g of goals) {
-    const reserved = goalDone(g) && !goalContribs(g, p.start, p.end).length ? 0 : (g.setAside || 0);
+    // Never hold back more than the goal still needed when the period began, so the last top-up is just what's left
+    const before = (g.startSaved || 0) + sum(goalContribs(g, '0000', addDays(p.start, -1)), x => x.amount);
+    const reserved = Math.max(0, Math.min(g.setAside || 0, round2(g.target - before)));
     const put = sum(goalContribs(g, p.start, p.end), x => x.amount);
     goalsSetAside += reserved; goalsIn += put; goalsExtra += Math.max(0, put - reserved);
   }
 
   const txs = spendsIn(p.start, p.end);
   const spent = sum(txs, x => x.amount);
-  const safe = round2(income + carry - billsCost - envReserve - goalsSetAside - goalsExtra - spent);
+  const leftover = leftoverInto(p);
+  const safe = round2(income + carry + leftover - billsCost - envReserve - goalsSetAside - goalsExtra - spent);
 
   const len = periodDays(p);
   const current = !future && p.end >= t;
@@ -5311,14 +5434,15 @@ function periodSummary(p) {
   const freeSpent = sum(free, x => x.amount);
   const avgDaily = elapsed ? spent / elapsed : 0;
   const allowance = (safe + freeSpent) / len;
+  const carriedIn = round2(leftover + carry); // all money brought forward: leftover plus envelope rollover
   let status = 'On track';
   if (safe < 0) status = 'Over budget';
   else if (elapsed && freeSpent / elapsed > allowance * 1.15) status = 'Over pace';
   else if (elapsed && freeSpent / elapsed > allowance) status = 'Watch it';
 
-  return { p, future, current, income, mainLanded, otherLanded, toArrive, others, pays, bills, billsTotal, billsPaid,
+  return { p, future, current, income, leftover, carriedIn, mainLanded, otherLanded, toArrive, others, pays, bills, billsTotal, billsPaid,
     billsCost, billsDue: aside.due, billsAhead: aside.ahead, billsLater: aside.later,
-    envs, carry, envReserve, envPlanned, envUsedTotal, goals, goalsSetAside, goalsExtra, goalsIn,
+    envs, carry, envReserve, envPlanned: envPlannedTotal, envUsedTotal, goals, goalsSetAside, goalsExtra, goalsIn,
     txs, spent, safe, len, elapsed, daysLeft, perDay: daysLeft ? safe / daysLeft : 0, avgDaily, status };
 }
 
@@ -5817,7 +5941,8 @@ function whenText(days) {
   return days === 0 ? t('today') : days > 0 ? tn(days, 'in {n} day', 'in {n} days') : tn(-days, '{n} day ago', '{n} days ago');
 }
 function billLine({ bill, due, paid }) {
-  return `<div class="item"><div class="grow"><div class="title">${esc(bill.name)} ${bill.sub ? `<span class="pill">${cap(t('sub'))}</span>` : ''} ${bill.autopay ? `<span class="pill accent">${cap(t('autopay'))}</span>` : ''}</div>
+  const late = !paid && due < todayISO();
+  return `<div class="item"><div class="grow"><div class="title">${esc(bill.name)} ${late ? `<span class="pill bad">${cap(t('overdue'))}</span>` : ''} ${bill.sub ? `<span class="pill">${cap(t('sub'))}</span>` : ''} ${bill.autopay ? `<span class="pill accent">${cap(t('autopay'))}</span>` : ''}</div>
     <div class="meta">${fmtDate(due)} · ${whenText(diffDays(todayISO(), due))}${paid ? ' · ' + t('paid') : ''}</div></div><div class="amt">${money(bill.amount)}</div>
     <button class="btn sm ${paid ? '' : 'primary'}" data-act="markPaid" data-bill="${bill.id}" data-due="${due}">${paid ? icon('check') + t('Paid') : t('Mark paid')}</button></div>`;
 }
@@ -5840,7 +5965,8 @@ VIEWS.today = () => {
   const greet = hour < 12 ? t('Good morning') : hour < 18 ? t('Good afternoon') : t('Good evening');
   const hello = s.name ? t('{greeting}, {name}', { greeting: greet, name: `<em class="person">${esc(s.name)}</em>` }) : greet;
   const ready = state.waitlist.filter(waitReady);
-  const nextBill = billsIn(today, addDays(today, 60)).find(b => !b.paid);
+  const overdue = overdueBills();
+  const nextBill = nextUnpaidBill();
   const spentToday = sum(spendsIn(today, today), x => x.amount);
   const due = backupDue();
   const banners = [
@@ -5855,27 +5981,35 @@ VIEWS.today = () => {
   const heroLabel = S.future ? t('Projected safe to spend') : S.current ? t('Safe to spend') : t('Left at the end of the period');
   const toPay = diffDays(today, p.nextPay);
   // While there's money left this period, the daily amount leads and the total supports it
-  const daily = S.current && S.daysLeft > 0 && S.safe > 0;
+  // On the last day the whole amount isn't a spending target: it carries into the next pay period
+  const lastDay = S.current && S.daysLeft === 1 && S.safe > 0;
+  const daily = S.current && S.daysLeft > 1 && S.safe > 0;
   const heroFigure = daily ? money(S.perDay) : money(S.safe);
-  const figureLabel = !daily ? heroLabel : S.daysLeft === 1 ? t('to spend today') : t('to spend each day until payday');
-  const days = daily ? tn(S.daysLeft, '{amount} safe to spend in total, {n} day left', '{amount} safe to spend in total, {n} days left', { amount: `<b>${money(S.safe)}</b>` }) : S.current ? (S.safe < 0 ? t('{amount} over until payday', { amount: `<b>${money(-S.safe)}</b>` }) : t('Nothing left to spend until payday')) : S.future ? t('Starts {date}', { date: fmtDate(p.start) }) : t('Ended {date}', { date: fmtDate(p.end) });
+  const figureLabel = lastDay ? t('left in this pay period') : !daily ? heroLabel : t('to spend each day until payday');
+  const days = lastDay ? t('Payday is tomorrow. Whatever you don’t spend carries into your next pay period.') : daily ? tn(S.daysLeft, '{amount} safe to spend in total, {n} day left', '{amount} safe to spend in total, {n} days left', { amount: `<b>${money(S.safe)}</b>` }) : S.current ? (S.safe < 0 ? t('{amount} over until payday', { amount: `<b>${money(-S.safe)}</b>` }) : t('Nothing left to spend until payday')) : S.future ? t('Starts {date}', { date: fmtDate(p.start) }) : t('Ended {date}', { date: fmtDate(p.end) });
   const tone = { 'On track': 'good', 'Watch it': 'warn', 'Over pace': 'warn', 'Over budget': 'bad' }[S.status];
   const todayCount = spendsIn(today, today).length;
   const fact = (k, v, note) => `<div class="fact"><dt>${k}</dt><dd>${v}${note ? `<small>${note}</small>` : ''}</dd></div>`;
+  const billFact = (k, b) => fact(k, b ? esc(b.bill.name) : t('None due'), b ? `${b.due < today ? t('overdue') + ' · ' : ''}${fmtShort(b.due)} · ${money(b.bill.amount)}` : '');
+  // Each kind of period shows facts about itself, not about today
+  const firstBill = S.bills[0];
+  const facts = S.current
+    ? billFact(t('Next bill'), nextBill) + fact(t('Spent today'), money(spentToday), todayCount ? tn(todayCount, '{n} entry', '{n} entries') : t('nothing yet')) + fact(t('Next payday'), fmtShort(p.nextPay), whenText(toPay))
+    : S.future
+      ? billFact(t('First bill'), firstBill) + fact(t('Bills this period'), money(S.billsTotal), tn(S.bills.length, '{n} payment', '{n} payments')) + fact(t('Payday'), fmtShort(p.start), whenText(diffDays(today, p.start)))
+      : fact(t('Bills paid'), t('{done} of {total}', { done: S.bills.filter(b => b.paid).length, total: S.bills.length }), money(S.billsPaid)) + fact(t('Spent'), money(S.spent), tn(S.txs.length, '{n} entry', '{n} entries')) + fact(t('Ended'), fmtShort(p.end), '');
   const hero = `<section class="hero" data-tour="hero" aria-label="${heroLabel}">
     <div class="head"><div class="big ${ui.reveal ? 'reveal' : ''}">${heroFigure}</div>
       <div class="label">${figureLabel}</div>
       ${S.current ? `<p class="meaning">${t('What’s left for everyday spending, after bills, envelopes and goals.')}</p>` : ''}
       <p class="sub"><span>${days}</span>${!state.sample && !liveBills().length && S.current ? `<button class="hero-note" data-act="addBill">${t('Add your bills so this number is accurate')}</button>` : ''}${S.current ? `<span class="status ${tone}"><i></i>${t(S.status)}</span>` : ''}</p></div>
-    <dl class="facts">${fact(t('Next bill'), nextBill ? esc(nextBill.bill.name) : t('None due'), nextBill ? `${fmtShort(nextBill.due)} · ${money(nextBill.bill.amount)}` : '')}
-      ${fact(t('Spent today'), money(spentToday), todayCount ? tn(todayCount, '{n} entry', '{n} entries') : t('nothing yet'))}
-      ${fact(t('Next payday'), fmtShort(p.nextPay), S.current ? whenText(toPay) : '')}</dl>
+    <dl class="facts">${facts}</dl>
     ${S.current ? `<div class="timeline">${dayMeasure(p, S)}
       <div class="ends"><span>${t('Last payday')}<i> · </i><b>${fmtShort(p.start)}</b></span><span>${t('Next payday')}<i> · </i><b>${fmtShort(p.nextPay)}</b></span></div>
       <p class="pace">${t('Day {day} of {len} in this pay period · you’ve spent about {amount} a day', { day: S.elapsed, len: S.len, amount: money(S.avgDaily) })}</p></div>` : ''}</section>`;
   const line = (sign, label, v) => `<div class="line"><span>${sign} ${label}</span><b>${money(v)}</b></div>`;
   const breakdown = `<div class="card breakdown" data-tour="breakdown"><div class="card-head"><h2>${t('How this number is made')}</h2><a class="btn sm" href="#guide">${t('Why')}</a></div>
-    ${line('+', t('Income this period'), S.income)}${line('+', t('Left over from before'), S.carry)}${line('−', t('Bills due this period'), S.billsDue)}${line('−', t('Set aside for bills due later'), S.billsAhead)}
+    ${line('+', t('Income this period'), S.income)}${S.carriedIn < 0 ? line('−', t('Overspent last period'), -S.carriedIn) : line('+', t('Left over from last period'), S.carriedIn)}${line('−', t('Bills due this period'), S.billsDue)}${line('−', t('Set aside for bills due later'), S.billsAhead)}
     ${line('−', t('Kept in envelopes'), S.envReserve)}${line('−', t('Set aside for goals'), S.goalsSetAside + S.goalsExtra)}${line('−', t('Already spent'), S.spent)}
     <div class="line total"><span>= ${t('Safe to spend')}</span><span>${money(S.safe)}</span></div>
     ${S.billsLater.length ? `<p class="small muted" style="margin:10px 0 0">${t('Bills are set aside a little each day, so the money is ready the day before each one is due.')} ${S.billsLater.slice(0, 3).map(x => esc(t('{name}: {amount} this period, due {date}', { name: x.bill.name, amount: money(x.part), date: fmtShort(x.due) }))).join(' · ')}</p>` : ''}
@@ -5893,7 +6027,7 @@ VIEWS.today = () => {
   const split = [[t('Bills'), S.billsCost, 'var(--c2)'], [t('Envelopes'), S.envReserve, 'var(--c3)'], [t('Goals'), S.goalsSetAside + S.goalsExtra, 'var(--c4)'], [t('Spent'), S.spent, 'var(--c6)'], [t('Left'), Math.max(0, S.safe), 'var(--accent)']];
   const splitTotal = sum(split, x => x[1]) || 1;
   const goalTarget = sum(state.goals, g => g.target), goalSavedAll = sum(state.goals, goalSaved);
-  const unpaid = S.bills.filter(b => !b.paid);
+  const unpaid = [...(S.current ? overdue : []), ...S.bills.filter(b => !b.paid)];
   const ofAmount = (a, b) => t('{part} of {whole}', { part: money(a), whole: money(b) });
   const plan = `<div class="card"><h2>${t('Is the plan holding?')}</h2><div class="stack" style="margin-top:12px">
     <div><div class="row spread small"><span>${t('Bills paid')}</span><b class="num">${ofAmount(S.billsPaid, S.billsTotal)}</b></div>${progress(S.billsPaid, S.billsTotal)}</div>
@@ -5992,7 +6126,7 @@ VIEWS.calendar = () => {
 
 /* ---------- Bills ---------- */
 VIEWS.bills = () => {
-  const p = periodAt(ui.periodOffset), list = billsIn(p.start, p.end);
+  const p = periodAt(ui.periodOffset), list = billsIn(p.start, p.end), overdue = overdueBills();
   const subs = liveBills().filter(b => b.sub && !b.paused), regular = liveBills().filter(b => !b.sub);
   const paid = list.filter(b => b.paid), auto = list.filter(b => b.bill.autopay);
   const subMonthly = sum(subs, billMonthly);
@@ -6009,6 +6143,7 @@ VIEWS.bills = () => {
       ${tile(t('On autopay'), money(sum(auto, b => b.bill.amount)), t('pays itself'))}
       ${tile(t('Subscriptions a month'), money(subMonthly), tn(subs.length, '{n} active subscription', '{n} active subscriptions'))}
       ${tile(t('Subscriptions a year'), money(subMonthly * 12), t('what they add up to'))}</div>
+    ${ui.periodOffset === 0 && overdue.length ? `<div class="card"><div class="card-head"><h2>${t('Overdue')}</h2><div class="small muted">${t('Not marked paid yet')}</div></div><div class="list mt">${overdue.map(billLine).join('')}</div></div>` : ''}
     <div class="card" data-tour="bills"><div class="card-head"><h2>${t('Due this period')}</h2><div class="small muted">${t('{amount} paid', { amount: money(sum(paid, b => b.bill.amount)) })} · ${Math.round(pct(paid.length, list.length))}%</div></div>
       ${progress(paid.length, list.length || 1)}<div class="list mt">${list.map(billLine).join('') || `<div class="empty">${t('Nothing due in this period.')}</div>`}</div></div>
     <div class="grid g2"><div class="card"><h2>${t('Bills')}</h2><div class="list mt">${regular.map(row).join('') || `<div class="empty">${t('No bills yet. Add rent, phone, insurance…')}</div>`}</div></div>
@@ -6160,7 +6295,7 @@ VIEWS.routines = () => {
       ${progress(ticks.length, r.steps.length || 1)}
       <div class="list mt">${r.steps.map(st => `<div class="item"><button class="check ${ticks.includes(st.id) ? 'on' : ''}" data-act="tick" data-r="${r.id}" data-s="${st.id}" aria-pressed="${ticks.includes(st.id)}" aria-label="${esc(t('Mark “{step}” done', { step: t(st.text) }))}">${ticks.includes(st.id) ? icon('check') : ''}</button>
         <div class="grow" style="${ticks.includes(st.id) ? 'text-decoration:line-through;opacity:.6' : ''}">${esc(t(st.text))}</div><button class="btn sm ghost" data-act="delStep" data-r="${r.id}" data-s="${st.id}" aria-label="${t('Remove step')}">${icon('x')}</button></div>`).join('')}</div>
-      <div class="row mt"><button class="btn sm" data-act="addStep" data-r="${r.id}">+ ${t('Add a step')}</button><button class="btn sm ghost" data-act="clearTicks" data-r="${r.id}">${t('Clear the ticks')}</button></div></div>`;
+      <div class="row wrap mt"><button class="btn sm" data-act="addStep" data-r="${r.id}">+ ${t('Add a step')}</button><button class="btn sm ghost" data-act="clearTicks" data-r="${r.id}">${t('Clear the ticks')}</button></div></div>`;
   };
   return header(t('Routines'), t('The same short list, every time')) + `<div class="grid g2" data-tour="routines">${state.routines.map(card).join('')}</div>`;
 };
@@ -6225,6 +6360,7 @@ VIEWS.guide = () => {
   <div class="card"><h2>${t('Safe to spend, explained')}</h2><p class="muted">${t('Each pay period, {app} starts with the money that has come in, then takes away everything that already has a job:', { app: APP.name })}</p>
     <div class="breakdown" style="max-width:420px"><div class="line"><span>+ ${t('Income that has landed')}</span></div><div class="line"><span>+ ${t('Envelope money rolled over')}</span></div><div class="line"><span>− ${t('Bills due this period')}</span></div><div class="line"><span>− ${t('Set aside for bills due later')}</span></div><div class="line"><span>− ${t('What is still in your envelopes')}</span></div><div class="line"><span>− ${t('What is set aside for goals')}</span></div><div class="line"><span>− ${t('What you have already spent')}</span></div><div class="line total"><span>= ${t('Safe to spend')}</span></div></div>
     <p class="muted small">${t('Bills are set aside a little each day, from the day after they were last due until the day before they are due again. A big bill a few weeks away takes a small amount off each day, instead of the whole amount on one day.')}</p>
+    <p class="muted small">${t('Money you don’t spend in a pay period carries into the next one, and so does overspending. You’ll see it as Left over from last period. Pay bills and log spending as you go so this stays true to your bank.')}</p>
     <p class="muted small">${t('Moving money between accounts or into savings does not change it. Income only counts once its date arrives.')}</p></div>
   <div class="grid g2"><div class="card"><h2>${t('Keeping your data safe')}</h2><p class="muted small">${t('Everything you enter stays in this browser, on this device. Nothing is uploaded, and there is no account to hack. That also means a few things are worth knowing:')}</p>
       <ul class="small guide-list">${li(t('Download a backup now and then'), t('(Settings → Download backup). {app} reminds you when it has been a while.', { app: APP.name }))}
@@ -6721,7 +6857,8 @@ function spendForm(tx = {}, onSaved) {
     submitLabel: isNew ? t('Add it') : t('Save'),
     onSubmit: v => {
       if (!(v.amount > 0)) return t('Enter an amount above zero.');
-      if (v.debtId) v.category = 'Debt payment';
+      // A debt payment is its own category and never comes out of an envelope
+      if (v.debtId) { v.category = 'Debt payment'; v.envelopeId = envelopeFor('Debt payment'); }
       commit(st => {
         if (isNew) st.tx.push({ id: uid('tx'), kind: 'spend', ...v });
         else Object.assign(byId(st.tx, tx.id), v);
@@ -6740,6 +6877,8 @@ function spendForm(tx = {}, onSaved) {
   const catEl = form.elements.category, envEl = form.elements.envelopeId;
   if (isNew && !tx.envelopeId) envEl.value = envelopeFor(catEl.value);
   catEl.addEventListener('change', () => { envEl.value = envelopeFor(catEl.value); });
+  const debtEl = form.elements.debtId;
+  if (debtEl) debtEl.addEventListener('change', () => { if (debtEl.value) { catEl.value = 'Debt payment'; envEl.value = envelopeFor('Debt payment'); } });
 }
 
 /* ---------- Backup / restore / export ---------- */
@@ -6930,7 +7069,7 @@ const forms = {
           hint: t('For example, if you plan {plan} and spend {spent}, the {left} left over carries forward, so next period you start with {total}. Leave this off and every period starts fresh at the planned amount.', { plan: money(100, { whole: true }), spent: money(80, { whole: true }), left: money(20, { whole: true }), total: money(120, { whole: true }) }) },
       ],
       values: { rollover: true, ...env },
-      onSubmit: v => commit(st => { if (isNew) st.envelopes.push({ id: uid('env'), createdOn: periodAt(0).start, ...v }); else Object.assign(byId(st.envelopes, env.id), v); }, isNew ? t('Envelope added') : t('Saved')),
+      onSubmit: v => commit(st => { if (isNew) st.envelopes.push({ id: uid('env'), createdOn: periodAt(0).start, ...v }); else { const e = byId(st.envelopes, env.id); const { planned, ...rest } = v; Object.assign(e, rest); setEnvPlanned(e, planned); } }, isNew ? t('Envelope added') : t('Saved')),
       onDelete: isNew ? null : () => commit(st => { st.envelopes = st.envelopes.filter(e => e.id !== env.id); st.tx.forEach(x => { if (x.envelopeId === env.id) x.envelopeId = ''; }); }, t('Deleted')),
     });
   },
@@ -6981,8 +7120,8 @@ const forms = {
         if (isNew) st.accounts.push({ id: uid('acc'), name: v.name, type: v.type, opening: v.balance, openedOn: todayISO(), paycheck: false });
         else {
           const acc = byId(st.accounts, a.id);
+          acc.name = v.name; acc.type = v.type; // the balance typed is read as the new type (owed, for a card)
           const drift = v.balance - accountBalance(acc);
-          acc.name = v.name; acc.type = v.type;
           if (Math.abs(drift) > 0.004) acc.opening = round2((acc.opening || 0) + drift);
         }
       }, isNew ? t('Account added') : t('Saved')),
@@ -7090,7 +7229,11 @@ const actions = {
   markPaid: el => {
     const bill = byId(state.bills, el.dataset.bill), key = paidKey(el.dataset.bill, el.dataset.due);
     if (bill.autopay && el.dataset.due <= todayISO() && !state.billPaid[key]) return toast(t('Autopay bills count as paid on their due date'));
-    commit(st => { if (st.billPaid[key]) delete st.billPaid[key]; else st.billPaid[key] = { on: todayISO() }; }, state.billPaid[key] ? t('Marked unpaid') : t('{name} marked paid', { name: bill.name }));
+    const was = state.billPaid[key], before = periodSummary(periodAt(0)).safe;
+    commit(st => { if (st.billPaid[key]) delete st.billPaid[key]; else st.billPaid[key] = { on: todayISO() }; });
+    // Paying a bill that was already set aside doesn't change Safe to spend, so say why
+    const same = Math.abs(periodSummary(periodAt(0)).safe - before) < 0.005;
+    toast(was ? t('Marked unpaid') : same ? t('{name} marked paid. It was already set aside, so Safe to spend stays the same.', { name: bill.name }) : t('{name} marked paid', { name: bill.name }), true);
   },
   addBill: el => forms.bill({}, el.dataset.sub === '1'),
   editBill: el => forms.bill(byId(state.bills, el.dataset.id)),
